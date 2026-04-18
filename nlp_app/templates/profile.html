@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ app_name }} | Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: "Segoe UI", Tahoma, sans-serif;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background: #ceb0b0;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #7a2f24fd, #000001);
+            color: rgba(24, 1, 1, 0.871);
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .header span {
+            font-size: 20px;
+            opacity: 0.9;
+        }
+
+        .logout {
+            background: #ae9aae;
+            padding: 8px 15px;
+            border-radius: 6px;
+            text-decoration: darkgrey;
+            color: rgba(7, 0, 9, 0.997);
+            font-size: 20px;
+        }
+
+        /* Layout */
+        .container {
+            display: flex;
+            min-height: calc(100vh - 80px);
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 220px;
+            background: #e7b5b5;
+            border-right: 1px solid #181616;
+            padding-top: 20px;
+        }
+
+        .sidebar a {
+            display: block;
+            padding: 15px 20px;
+            color: #000000;
+            text-decoration: none;
+            border-left: 4px solid transparent;
+        }
+
+        .sidebar a.active {
+            background: #eef3ff;
+            border-left: 4px solid #2a5298;
+            font-weight: bold;
+            color: #2a5298;
+        }
+
+        .sidebar a:hover {
+            background: #bd6666;
+        }
+
+        /* Content */
+        .content {
+            flex: 1;
+            padding: 30px;
+        }
+
+        .card {
+            background: rgb(137, 192, 174);
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(1, 3, 3, 0.999);
+        }
+
+        .card h2 {
+            margin-top: 0;
+            color: #794407;
+        }
+
+        textarea {
+            width: 100%;
+            height: 140px;
+            padding: 12px;
+            font-size: 16px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            resize: vertical;
+        }
+
+        button {
+            margin-top: 15px;
+            padding: 10px 20px;
+            background: #760202;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 15px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #1e3c72;
+        }
+
+        .result {
+            margin-top: 20px;
+            background: #e8e5e6;
+            padding: 15px;
+            border-radius: 6px;
+        }
+    </style>
+</head>
+
+<body>
+<!-- HEADER -->
+<div class="header">
+    <div>
+        <h1>{{ app_name }}</h1>
+        <span>Hey!Nice to see you, {{ session['user'] }}</span>
+    </div>
+   <a href="{{ url_for('home') }}" class="logout">Logout</a> 
+</div>
+
+<!-- MAIN -->
+<div class="container">
+
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+        <a href="{{ url_for('profile', tab='NER') }}"
+           class="{% if active_tab == 'NER' %}active{% endif %}">
+            Named Entity Recognition
+        </a>
+
+        <a href="{{ url_for('profile', tab='Sentiment') }}"
+           class="{% if active_tab == 'Sentiment' %}active{% endif %}">
+            Sentiment Analysis
+        </a>
+
+        <a href="{{ url_for('profile', tab='Summary') }}"
+           class="{% if active_tab == 'Summary' %}active{% endif %}">
+            Text Summarization
+        </a>
+
+        <a href="{{ url_for('profile', tab='Keywords') }}"
+           class="{% if active_tab == 'Keywords' %}active{% endif %}">
+            Keyword Extraction
+        </a>
+         
+        <a href="{{ url_for('profile', tab='Analyze') }}"
+           class="{% if active_tab == 'Analyze' %}active{% endif %}">
+            superintelligence analysis
+</a>
+
+    </div>
+
+    <!-- CONTENT -->
+    <div class="content">
+        <div class="card">
+
+            {% if active_tab == 'NER' %}
+                <h2>Named Entity Recognition</h2>
+                <p>Identify names, locations, organizations, and more.</p>
+
+                <textarea id="nerText" placeholder="Enter text here..."></textarea>
+                <button type="button" onclick="analyzeNER()">Analyze</button>
+                <div id="nerResult" class="result"></div>
+
+            {% elif active_tab == 'Sentiment' %}
+                <h2>Sentiment Analysis</h2>
+                <p>Understand emotional tone in text.</p>
+
+                <textarea
+                    id="sentimentText"
+                    placeholder="Paste text here for sentiment analysis..."
+                    rows="6"
+                ></textarea>
+
+                <button type="button" onclick="analyzeSentiment()">Analyze</button>
+
+                <div id="sentimentResult" class="result"></div>
+
+            {% elif active_tab == 'Summary' %}
+                <h2>Text Summarization</h2>
+                <p>Generate concise summaries from long text.</p>
+                <textarea id="summaryText" placeholder="Paste a long article, research paper, or document here..."></textarea>
+                <button type="button" onclick="analyzeSummary()">Analyze Document</button>
+                <div id="summaryResult" class="result"></div>
+
+            {% elif active_tab == 'Keywords' %}
+                <h2>Keyword Extraction</h2>
+                <p>Extract important keywords from content.</p>
+
+                <textarea id="inputText" placeholder="Enter text here..."></textarea>
+                <button type="button" onclick="analyzeKeywords()">Analyze</button>
+                <div id="result" class="result"></div>
+
+            {% elif active_tab == 'Analyze' %}
+                <h2>superintelligence analysis</h2>
+                <p>
+                    Analyze a document using multiple NLP techniques at once:
+                    summary, sentiment, keywords, and entities.
+                </p>
+
+                <textarea
+                    id="analyzeText"
+                    placeholder="Paste a long article, research paper, or document here..."
+                    rows="8"
+                ></textarea>
+
+                <button type="button" onclick="analyzeDocument()">
+                    Analyze Document
+                </button>
+
+                <div id="analyzeResult" class="result"></div>
+            {% endif %}
+
+
+        </div>
+    </div>
+
+</div>
+
+<script>
+/* ---------- SENTIMENT ---------- */
+function analyzeSentiment() {
+    const text = document.getElementById("sentimentText").value.trim();
+    const box = document.getElementById("sentimentResult");
+
+    if (!text) {
+        box.innerHTML = "Please enter text.";
+        return;
+    }
+
+    box.innerHTML = "Analyzing sentiment...";
+
+    fetch("/api/sentiment", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: "text=" + encodeURIComponent(text)
+    })
+    .then(r => r.json())
+    .then(data => {
+        if (!Array.isArray(data) || data.length === 0) {
+            box.innerHTML = "Sentiment analysis failed.";
+            return;
+        }
+
+        const s = data[0];
+        box.innerHTML = `
+            <strong>Sentiment:</strong> ${s.label}<br>
+            <strong>Confidence:</strong> ${s.score.toFixed(2)}
+        `;
+    })
+    .catch(() => {
+        box.innerHTML = "Server error.";
+    });
+}
+
+/* ---------- SUMMARY ONLY ---------- */
+function analyzeSummary() {
+    const text = document.getElementById("summaryText").value.trim();
+    const box = document.getElementById("summaryResult");
+
+    if (!text) {
+        box.innerHTML = "Please enter text.";
+        return;
+    }
+
+    box.innerHTML = "Summarizing...";
+
+    fetch("/api/summarize", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: "text=" + encodeURIComponent(text)
+    })
+    .then(r => r.json())
+    .then(data => {
+        box.innerHTML = data.summary ? data.summary : "No summary returned.";
+    })
+    .catch(() => {
+        box.innerHTML = "Summarization failed.";
+    });
+}
+
+/* ---------- FULL DOCUMENT (PIPELINE) ---------- */
+
+/* ---------- KEYWORDS ---------- */
+function analyzeKeywords() {
+    const text = document.getElementById("inputText").value.trim();
+    const box = document.getElementById("result");
+
+    if (!text) {
+        box.innerHTML = "Please enter text.";
+        return;
+    }
+
+    box.innerHTML = "Analyzing...";
+
+    fetch("/api/keywords-with-sentiment", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: "text=" + encodeURIComponent(text)
+    })
+    .then(r => r.json())
+    .then(data => {
+        if (!data.keywords || !data.sentiment) {
+            box.innerHTML = "Invalid response.";
+            return;
+        }
+
+        let html = `<strong>Sentiment:</strong> ${data.sentiment[0].label}<br><br>`;
+        html += "<strong>Keywords:</strong><ul>";
+
+        data.keywords.forEach(k => {
+            html += `<li>${k[0]} (${k[1].toFixed(2)})</li>`;
+        });
+
+        html += "</ul>";
+        box.innerHTML = html;
+    })
+    .catch(() => {
+        box.innerHTML = "Keyword extraction failed.";
+    });
+}
+
+/* ---------- NER ---------- */
+function analyzeNER() {
+    const text = document.getElementById("nerText").value.trim();
+    const box = document.getElementById("nerResult");
+
+    if (!text) {
+        box.innerHTML = "Please enter text.";
+        return;
+    }
+
+    box.innerHTML = "Analyzing...";
+
+    fetch("/api/ner", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: "text=" + encodeURIComponent(text)
+    })
+    .then(r => r.json())
+    .then(data => {
+        if (!Array.isArray(data) || data.length === 0) {
+            box.innerHTML = "No entities found.";
+            return;
+        }
+
+        let html = "";
+        data.forEach(e => {
+            html += `${e.text} → ${e.label}<br>`;
+        });
+
+        box.innerHTML = html;
+    })
+    .catch(() => {
+        box.innerHTML = "NER failed.";
+    });
+}
+
+function analyzeDocument() {
+    const text = document.getElementById("analyzeText").value.trim();
+    const box = document.getElementById("analyzeResult");
+
+    if (!text) {
+        box.innerHTML = "Please enter text.";
+        return;
+    }
+
+    box.innerHTML = "<em>Analyzing document...</em>";
+
+    fetch("/api/analyze", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded"
+        },
+        body: "text=" + encodeURIComponent(text)
+    })
+    .then(res => res.json())
+    .then(data => {
+        let html = "";
+
+        if (data.summary) {
+            html += `<h4>Summary</h4><p>${data.summary}</p>`;
+        }
+
+        if (data.sentiment && data.sentiment.label) {
+            html += `<h4>Sentiment</h4>
+                     <p>${data.sentiment.label} (${data.sentiment.score.toFixed(2)})</p>`;
+        }
+
+        if (Array.isArray(data.entities) && data.entities.length > 0) {
+            html += "<h4>Entities</h4><ul>";
+            data.entities.forEach(e => {
+                html += `<li>${e.text} → ${e.label}</li>`;
+            });
+            html += "</ul>";
+        }
+
+        box.innerHTML = html || "No results.";
+    })
+    .catch(() => {
+        box.innerHTML = "Superintelligence analysis failed.";
+    });
+}
+
+</script>
+
+</body>
+</html>
