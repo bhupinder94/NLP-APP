@@ -46,11 +46,13 @@ def get_keyword_model():
 
     return kw_model
 
+MAX_KEYWORD_TEXT_LENGTH = 2500
+
 def extract_keywords(text, top_n=10):
-    candidate_text = text.strip()[:MAX_KEYWORD_TEXT_LENGTH]
+    truncated = text.strip()[:MAX_KEYWORD_TEXT_LENGTH]
     try:
         return get_keyword_model().extract_keywords(
-            candidate_text,
+            truncated,
             keyphrase_ngram_range=(1, 2),
             stop_words='english',
             top_n=top_n
@@ -59,7 +61,7 @@ def extract_keywords(text, top_n=10):
         if _is_cuda_error(exc):
             _switch_to_cpu()
             return get_keyword_model().extract_keywords(
-                candidate_text,
+                truncated,
                 keyphrase_ngram_range=(1, 2),
                 stop_words='english',
                 top_n=top_n

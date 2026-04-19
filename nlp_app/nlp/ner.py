@@ -2,7 +2,7 @@ import spacy
 
 nlp = None
 nlp_error = None
-
+MAX_TEXT_LENGTH = 50000  # 50k chars for NER
 
 def get_ner_model():
     global nlp, nlp_error
@@ -21,7 +21,9 @@ def get_ner_model():
     return nlp
 
 def extract_entities(text):
-    doc = get_ner_model()(text)
+    # Truncate very long text for NER processing
+    truncated = text.strip()[:MAX_TEXT_LENGTH]
+    doc = get_ner_model()(truncated)
     entities = []
 
     for ent in doc.ents:

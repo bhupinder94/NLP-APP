@@ -54,14 +54,18 @@ def get_sentiment_model():
 
     return sentiment_model
 
+MAX_TEXT_LENGTH = 1500
+
 def analyze_sentiment(text):
+    # Truncate long text for model compatibility
+    truncated = text.strip()[:MAX_TEXT_LENGTH]
     try:
-        return get_sentiment_model()(text)
+        return get_sentiment_model()(truncated)
     except Exception as e:
         if _is_cuda_error(e):
             try:
                 _switch_to_cpu()
-                return get_sentiment_model()(text)
+                return get_sentiment_model()(truncated)
             except Exception as retry_error:
                 return [{"label": "ERROR", "score": 0.0, "message": str(retry_error)}]
         return [{"label": "ERROR", "score": 0.0, "message": str(e)}]
