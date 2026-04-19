@@ -1,0 +1,724 @@
+- generic [ref=e2]:
+  - region
+  - generic [ref=e3]:
+    - link "Skip to content" [ref=e4] [cursor=pointer]:
+      - /url: "#start-of-content"
+    - banner [ref=e6]:
+      - heading "Navigation Menu" [level=2] [ref=e7]
+      - generic [ref=e8]:
+        - link "Homepage" [ref=e10] [cursor=pointer]:
+          - /url: /
+          - img [ref=e11]
+        - generic [ref=e13]:
+          - navigation "Global" [ref=e16]:
+            - list [ref=e17]:
+              - listitem [ref=e18]:
+                - button "Platform" [ref=e20] [cursor=pointer]:
+                  - text: Platform
+                  - img [ref=e21]
+              - listitem [ref=e23]:
+                - button "Solutions" [ref=e25] [cursor=pointer]:
+                  - text: Solutions
+                  - img [ref=e26]
+              - listitem [ref=e28]:
+                - button "Resources" [ref=e30] [cursor=pointer]:
+                  - text: Resources
+                  - img [ref=e31]
+              - listitem [ref=e33]:
+                - button "Open Source" [ref=e35] [cursor=pointer]:
+                  - text: Open Source
+                  - img [ref=e36]
+              - listitem [ref=e38]:
+                - button "Enterprise" [ref=e40] [cursor=pointer]:
+                  - text: Enterprise
+                  - img [ref=e41]
+              - listitem [ref=e43]:
+                - link "Pricing" [ref=e44] [cursor=pointer]:
+                  - /url: https://github.com/pricing
+                  - generic [ref=e45]: Pricing
+          - generic [ref=e46]:
+            - button "Search or jump to…" [ref=e49] [cursor=pointer]:
+              - img [ref=e51]
+            - link "Sign in" [ref=e54] [cursor=pointer]:
+              - /url: /login?return_to=https%3A%2F%2Fgithub.com%2Fbhupinder94%2FNLP-APP
+            - link "Sign up" [ref=e55] [cursor=pointer]:
+              - /url: /signup?ref_cta=Sign+up&ref_loc=header+logged+out&ref_page=%2F%3Cuser-name%3E%2F%3Crepo-name%3E&source=header-repo&source_repo=bhupinder94%2FNLP-APP
+            - button "Appearance settings" [ref=e58] [cursor=pointer]:
+              - img
+  - main [ref=e62]:
+    - generic [ref=e63]:
+      - generic [ref=e64]:
+        - generic [ref=e66]:
+          - img [ref=e67]
+          - link "bhupinder94" [ref=e70] [cursor=pointer]:
+            - /url: /bhupinder94
+          - generic [ref=e71]: /
+          - strong [ref=e72]:
+            - link "NLP-APP" [ref=e73] [cursor=pointer]:
+              - /url: /bhupinder94/NLP-APP
+          - generic [ref=e74]: Public
+        - generic [ref=e75]:
+          - list:
+            - listitem [ref=e76]:
+              - link "You must be signed in to change notification settings" [ref=e77] [cursor=pointer]:
+                - /url: /login?return_to=%2Fbhupinder94%2FNLP-APP
+                - img [ref=e78]
+                - text: Notifications
+            - listitem [ref=e80]:
+              - link "Fork 0" [ref=e81] [cursor=pointer]:
+                - /url: /login?return_to=%2Fbhupinder94%2FNLP-APP
+                - img [ref=e82]
+                - text: Fork
+                - generic "0" [ref=e84]
+            - listitem [ref=e85]:
+              - link "You must be signed in to star a repository" [ref=e87] [cursor=pointer]:
+                - /url: /login?return_to=%2Fbhupinder94%2FNLP-APP
+                - img [ref=e88]
+                - text: Star
+                - generic "0 users starred this repository" [ref=e90]: "0"
+      - navigation "Repository" [ref=e91]:
+        - list [ref=e92]:
+          - listitem [ref=e93]:
+            - link "Code" [ref=e94] [cursor=pointer]:
+              - /url: /bhupinder94/NLP-APP
+              - img [ref=e95]
+              - generic [ref=e97]: Code
+          - listitem [ref=e98]:
+            - link "Issues" [ref=e99] [cursor=pointer]:
+              - /url: /bhupinder94/NLP-APP/issues
+              - img [ref=e100]
+              - generic [ref=e103]: Issues
+          - listitem [ref=e104]:
+            - link "Pull requests" [ref=e105] [cursor=pointer]:
+              - /url: /bhupinder94/NLP-APP/pulls
+              - img [ref=e106]
+              - generic [ref=e108]: Pull requests
+          - listitem [ref=e109]:
+            - link "Actions" [ref=e110] [cursor=pointer]:
+              - /url: /bhupinder94/NLP-APP/actions
+              - img [ref=e111]
+              - generic [ref=e113]: Actions
+          - listitem [ref=e114]:
+            - link "Projects" [ref=e115] [cursor=pointer]:
+              - /url: /bhupinder94/NLP-APP/projects
+              - img [ref=e116]
+              - generic [ref=e118]: Projects
+          - listitem [ref=e119]:
+            - link "Security and quality" [ref=e120] [cursor=pointer]:
+              - /url: /bhupinder94/NLP-APP/security
+              - img [ref=e121]
+              - generic [ref=e123]: Security and quality
+          - listitem [ref=e124]:
+            - link "Insights" [ref=e125] [cursor=pointer]:
+              - /url: /bhupinder94/NLP-APP/pulse
+              - img [ref=e126]
+              - generic [ref=e128]: Insights
+    - generic [ref=e141]:
+      - heading "bhupinder94/NLP-APP" [level=1] [ref=e143]
+      - generic [ref=e144]:
+        - generic [ref=e147]:
+          - generic [ref=e148]:
+            - generic [ref=e149]:
+              - button "main branch" [ref=e151] [cursor=pointer]:
+                - generic [ref=e152]:
+                  - generic [ref=e154]:
+                    - img [ref=e156]
+                    - generic [ref=e159]: main
+                  - generic:
+                    - img
+              - generic [ref=e160]:
+                - link "Go to Branches page" [ref=e161] [cursor=pointer]:
+                  - /url: /bhupinder94/NLP-APP/branches
+                  - img [ref=e162]
+                - link "Go to Tags page" [ref=e164] [cursor=pointer]:
+                  - /url: /bhupinder94/NLP-APP/tags
+                  - img [ref=e165]
+            - generic [ref=e167]:
+              - generic [ref=e171]:
+                - img [ref=e173]
+                - combobox "Go to file" [ref=e175]
+              - button "Code" [ref=e176] [cursor=pointer]:
+                - generic [ref=e177]:
+                  - generic:
+                    - img
+                  - generic [ref=e178]: Code
+                  - generic:
+                    - img
+          - generic [ref=e179]:
+            - generic [ref=e180]:
+              - heading "Folders and files" [level=2] [ref=e181]
+              - table "Folders and files" [ref=e182]:
+                - rowgroup:
+                  - row "Name Last commit message Last commit date":
+                    - columnheader "Name"
+                    - columnheader "Last commit message":
+                      - generic "Last commit message"
+                    - columnheader "Last commit date":
+                      - generic "Last commit date"
+                - rowgroup [ref=e183]:
+                  - row "Latest commit bhupinder94 commits by bhupinder94 Merge branch 'main' of https://github.com/bhupinder94/NLP-APP Commit e93745c · Apr 19, 202648 minutes ago History 6 Commits" [ref=e184]:
+                    - cell "Latest commit bhupinder94 commits by bhupinder94 Merge branch 'main' of https://github.com/bhupinder94/NLP-APP Commit e93745c · Apr 19, 202648 minutes ago History 6 Commits" [ref=e185]:
+                      - generic [ref=e186]:
+                        - heading "Latest commit" [level=2] [ref=e187]
+                        - generic [ref=e188]:
+                          - generic [ref=e190]:
+                            - link "bhupinder94" [ref=e191] [cursor=pointer]:
+                              - /url: /bhupinder94
+                              - img "bhupinder94" [ref=e192]
+                            - link "commits by bhupinder94" [ref=e193] [cursor=pointer]:
+                              - /url: /bhupinder94/NLP-APP/commits?author=bhupinder94
+                              - text: bhupinder94
+                          - generic [ref=e196]:
+                            - link "Merge branch 'main' of" [ref=e197] [cursor=pointer]:
+                              - /url: /bhupinder94/NLP-APP/commit/e93745cc0fc877975c52bf7a359259ee22cb085a
+                            - link "https://github.com/bhupinder94/NLP-APP" [ref=e198] [cursor=pointer]:
+                              - /url: https://github.com/bhupinder94/NLP-APP
+                        - generic [ref=e199]:
+                          - generic [ref=e201]:
+                            - link "Commit e93745c" [ref=e202] [cursor=pointer]:
+                              - /url: /bhupinder94/NLP-APP/commit/e93745cc0fc877975c52bf7a359259ee22cb085a
+                              - text: e93745c
+                            - text: ·
+                            - generic "Apr 19, 2026, 3:46 PM GMT+5:30" [ref=e203]: Apr 19, 202648 minutes ago
+                          - generic [ref=e204]:
+                            - heading "History" [level=2] [ref=e205]
+                            - link "6 Commits" [ref=e206] [cursor=pointer]:
+                              - /url: /bhupinder94/NLP-APP/commits/main/
+                              - generic [ref=e207]:
+                                - generic:
+                                  - img
+                                - generic [ref=e208]: 6 Commits
+                  - 'row "nlp_app, (Directory) Add NLP features: summarizer, sentiment, NER, keywords with pipeline … Apr 19, 202653 minutes ago" [ref=e209]':
+                    - cell "nlp_app, (Directory)" [ref=e210]:
+                      - generic [ref=e211]:
+                        - img [ref=e212]
+                        - link "nlp_app, (Directory)" [ref=e217] [cursor=pointer]:
+                          - /url: /bhupinder94/NLP-APP/tree/main/nlp_app
+                          - text: nlp_app
+                    - 'cell "Add NLP features: summarizer, sentiment, NER, keywords with pipeline …" [ref=e218]':
+                      - 'link "Add NLP features: summarizer, sentiment, NER, keywords with pipeline …" [ref=e221] [cursor=pointer]':
+                        - /url: /bhupinder94/NLP-APP/commit/044a5af8d4f48ea67e262db77714da577fff55a5
+                    - cell "Apr 19, 202653 minutes ago" [ref=e222]:
+                      - generic [ref=e223]: Apr 19, 202653 minutes ago
+                  - row ".gitignore, (File) Intial commit Apr 18, 2026yesterday" [ref=e224]:
+                    - cell ".gitignore, (File)" [ref=e225]:
+                      - generic [ref=e226]:
+                        - img [ref=e227]
+                        - link ".gitignore, (File)" [ref=e232] [cursor=pointer]:
+                          - /url: /bhupinder94/NLP-APP/blob/main/.gitignore
+                          - text: .gitignore
+                    - cell "Intial commit" [ref=e233]:
+                      - link "Intial commit" [ref=e236] [cursor=pointer]:
+                        - /url: /bhupinder94/NLP-APP/commit/43cbcda77ad2680e8f4ba346a7639ad30a65ad5c
+                    - cell "Apr 18, 2026yesterday" [ref=e237]:
+                      - generic [ref=e238]: Apr 18, 2026yesterday
+                  - row "LICENSE, (File) Add MIT license Apr 18, 2026yesterday" [ref=e239]:
+                    - cell "LICENSE, (File)" [ref=e240]:
+                      - generic [ref=e241]:
+                        - img [ref=e242]
+                        - link "LICENSE, (File)" [ref=e247] [cursor=pointer]:
+                          - /url: /bhupinder94/NLP-APP/blob/main/LICENSE
+                          - text: LICENSE
+                    - cell "Add MIT license" [ref=e248]:
+                      - link "Add MIT license" [ref=e251] [cursor=pointer]:
+                        - /url: /bhupinder94/NLP-APP/commit/bb4bdda5e141f7313123c8fd028018f922f7bd52
+                    - cell "Apr 18, 2026yesterday" [ref=e252]:
+                      - generic [ref=e253]: Apr 18, 2026yesterday
+                  - row "README.md, (File) Update README.md Apr 18, 2026yesterday" [ref=e254]:
+                    - cell "README.md, (File)" [ref=e255]:
+                      - generic [ref=e256]:
+                        - img [ref=e257]
+                        - link "README.md, (File)" [ref=e262] [cursor=pointer]:
+                          - /url: /bhupinder94/NLP-APP/blob/main/README.md
+                          - text: README.md
+                    - cell "Update README.md" [ref=e263]:
+                      - link "Update README.md" [ref=e266] [cursor=pointer]:
+                        - /url: /bhupinder94/NLP-APP/commit/ab6ac03e9db4736b3848877affca4d1aa8324e3c
+                    - cell "Apr 18, 2026yesterday" [ref=e267]:
+                      - generic [ref=e268]: Apr 18, 2026yesterday
+            - generic [ref=e270]:
+              - generic [ref=e271]:
+                - heading "Repository files navigation" [level=2] [ref=e272]
+                - navigation "Repository files" [ref=e273]:
+                  - list [ref=e274]:
+                    - listitem [ref=e275]:
+                      - link "README" [ref=e276] [cursor=pointer]:
+                        - /url: "#"
+                        - img [ref=e278]
+                        - generic [ref=e280]: README
+                    - listitem [ref=e281]:
+                      - link "MIT license" [ref=e282] [cursor=pointer]:
+                        - /url: "#"
+                        - img [ref=e284]
+                        - generic [ref=e286]: MIT license
+                - button "Outline" [ref=e287] [cursor=pointer]:
+                  - img [ref=e288]
+              - article [ref=e291]:
+                - generic [ref=e292]:
+                  - heading "TextChar AI" [level=1] [ref=e293]
+                  - 'link "Permalink: TextChar AI" [ref=e294] [cursor=pointer]':
+                    - /url: "#textchar-ai"
+                    - img [ref=e295]
+                - paragraph [ref=e297]: TextChar AI is a Flask-based NLP web application with user login/registration and an interactive dashboard for common text analysis tasks.
+                - paragraph [ref=e298]: "The app currently supports:"
+                - list [ref=e299]:
+                  - listitem [ref=e300]: Named Entity Recognition
+                  - listitem [ref=e301]: Sentiment Analysis
+                  - listitem [ref=e302]: Text Summarization
+                  - listitem [ref=e303]: Keyword Extraction
+                  - listitem [ref=e304]: Combined document analysis in a single workflow
+                - generic [ref=e305]:
+                  - heading "Features" [level=2] [ref=e306]
+                  - 'link "Permalink: Features" [ref=e307] [cursor=pointer]':
+                    - /url: "#features"
+                    - img [ref=e308]
+                - list [ref=e310]:
+                  - listitem [ref=e311]: Flask web app with HTML templates for login, registration, and dashboard views
+                  - listitem [ref=e312]:
+                    - text: NLP API routes under
+                    - code [ref=e313]: /api
+                  - listitem [ref=e314]:
+                    - text: User authentication with hashed passwords using
+                    - code [ref=e315]: bcrypt
+                  - listitem [ref=e316]: MySQL support for user storage
+                  - listitem [ref=e317]: Automatic fallback to SQLite when MySQL is unavailable
+                  - listitem [ref=e318]: Lazy model loading so the app can start even when large NLP models are not preloaded
+                - generic [ref=e319]:
+                  - heading "Project Structure" [level=2] [ref=e320]
+                  - 'link "Permalink: Project Structure" [ref=e321] [cursor=pointer]':
+                    - /url: "#project-structure"
+                    - img [ref=e322]
+                - generic [ref=e324]:
+                  - code [ref=e326]: demosession_api13lecture/ ├── README.md ├── .gitignore ├── .vscode/ ├── myenv/ └── nlp_app/ ├── app.py ├── db.py ├── requirements.txt ├── nlp/ │ ├── keywords.py │ ├── ner.py │ ├── pipeline.py │ ├── sentiment.py │ └── summarizer.py ├── routes/ │ └── nlp_routes.py └── templates/ ├── login.html ├── register.html └── profile.html
+                  - button "Copy" [ref=e328] [cursor=pointer]:
+                    - img [ref=e329]
+                - generic [ref=e332]:
+                  - heading "Tech Stack" [level=2] [ref=e333]
+                  - 'link "Permalink: Tech Stack" [ref=e334] [cursor=pointer]':
+                    - /url: "#tech-stack"
+                    - img [ref=e335]
+                - list [ref=e337]:
+                  - listitem [ref=e338]: Python
+                  - listitem [ref=e339]: Flask
+                  - listitem [ref=e340]: Jinja2
+                  - listitem [ref=e341]: MySQL Connector
+                  - listitem [ref=e342]: SQLite
+                  - listitem [ref=e343]: bcrypt
+                  - listitem [ref=e344]: spaCy
+                  - listitem [ref=e345]: Transformers
+                  - listitem [ref=e346]: PyTorch
+                  - listitem [ref=e347]: KeyBERT
+                  - listitem [ref=e348]: Sentence Transformers
+                - generic [ref=e349]:
+                  - heading "Setup" [level=2] [ref=e350]
+                  - 'link "Permalink: Setup" [ref=e351] [cursor=pointer]':
+                    - /url: "#setup"
+                    - img [ref=e352]
+                - generic [ref=e354]:
+                  - heading "1. Clone the repository" [level=3] [ref=e355]
+                  - 'link "Permalink: 1. Clone the repository" [ref=e356] [cursor=pointer]':
+                    - /url: "#1-clone-the-repository"
+                    - img [ref=e357]
+                - generic [ref=e359]:
+                  - generic [ref=e360]: git clone https://github.com/bhupinder94/NLP-APP.git cd NLP-APP
+                  - button "Copy" [ref=e362] [cursor=pointer]:
+                    - img [ref=e363]
+                - generic [ref=e366]:
+                  - heading "2. Create and activate a virtual environment" [level=3] [ref=e367]
+                  - 'link "Permalink: 2. Create and activate a virtual environment" [ref=e368] [cursor=pointer]':
+                    - /url: "#2-create-and-activate-a-virtual-environment"
+                    - img [ref=e369]
+                - paragraph [ref=e371]: "Windows PowerShell:"
+                - generic [ref=e372]:
+                  - generic [ref=e373]: python -m venv myenv .\myenv\Scripts\Activate.ps1
+                  - button "Copy" [ref=e375] [cursor=pointer]:
+                    - img [ref=e376]
+                - paragraph [ref=e379]: "Windows Command Prompt:"
+                - generic [ref=e380]:
+                  - generic [ref=e381]: python -m venv myenv myenv\Scripts\activate
+                  - button "Copy" [ref=e383] [cursor=pointer]:
+                    - img [ref=e384]
+                - generic [ref=e387]:
+                  - heading "3. Install dependencies" [level=3] [ref=e388]
+                  - 'link "Permalink: 3. Install dependencies" [ref=e389] [cursor=pointer]':
+                    - /url: "#3-install-dependencies"
+                    - img [ref=e390]
+                - paragraph [ref=e392]: "Base dependencies from the project:"
+                - generic [ref=e393]:
+                  - generic [ref=e394]: pip install -r nlp_app/requirements.txt
+                  - button "Copy" [ref=e396] [cursor=pointer]:
+                    - img [ref=e397]
+                - paragraph [ref=e400]: "This app also imports NLP and database packages that should be installed in the same environment:"
+                - generic [ref=e401]:
+                  - generic [ref=e402]: pip install requests bcrypt mysql-connector-python torch transformers sentence-transformers keybert spacy
+                  - button "Copy" [ref=e404] [cursor=pointer]:
+                    - img [ref=e405]
+                - paragraph [ref=e408]: "Install the spaCy English model used for NER:"
+                - generic [ref=e409]:
+                  - generic [ref=e410]: python -m spacy download en_core_web_md
+                  - button "Copy" [ref=e412] [cursor=pointer]:
+                    - img [ref=e413]
+                - generic [ref=e416]:
+                  - heading "Environment Variables" [level=2] [ref=e417]
+                  - 'link "Permalink: Environment Variables" [ref=e418] [cursor=pointer]':
+                    - /url: "#environment-variables"
+                    - img [ref=e419]
+                - paragraph [ref=e421]: The app reads database and app settings from environment variables.
+                - paragraph [ref=e422]: "Optional variables:"
+                - list [ref=e423]:
+                  - listitem [ref=e424]:
+                    - code [ref=e425]: FLASK_SECRET_KEY
+                  - listitem [ref=e426]:
+                    - code [ref=e427]: DB_HOST
+                  - listitem [ref=e428]:
+                    - code [ref=e429]: DB_USER
+                  - listitem [ref=e430]:
+                    - code [ref=e431]: DB_PASSWORD
+                  - listitem [ref=e432]:
+                    - code [ref=e433]: DB_NAME
+                  - listitem [ref=e434]:
+                    - code [ref=e435]: ALLOW_MODEL_DOWNLOADS
+                - paragraph [ref=e436]: "Example in PowerShell:"
+                - generic [ref=e437]:
+                  - generic [ref=e438]:
+                    - generic [ref=e439]: $env:FLASK_SECRET_KEY
+                    - text: =
+                    - generic [ref=e440]: "\"change-me\""
+                    - generic [ref=e441]: $env:DB_HOST
+                    - text: =
+                    - generic [ref=e442]: "\"localhost\""
+                    - generic [ref=e443]: $env:DB_USER
+                    - text: =
+                    - generic [ref=e444]: "\"root\""
+                    - generic [ref=e445]: $env:DB_PASSWORD
+                    - text: =
+                    - generic [ref=e446]: "\"your-mysql-password\""
+                    - generic [ref=e447]: $env:DB_NAME
+                    - text: =
+                    - generic [ref=e448]: "\"nlp_app\""
+                    - generic [ref=e449]: $env:ALLOW_MODEL_DOWNLOADS
+                    - text: =
+                    - generic [ref=e450]: "\"1\""
+                  - button "Copy" [ref=e452] [cursor=pointer]:
+                    - img [ref=e453]
+                - generic [ref=e456]:
+                  - heading "Database Behavior" [level=2] [ref=e457]
+                  - 'link "Permalink: Database Behavior" [ref=e458] [cursor=pointer]':
+                    - /url: "#database-behavior"
+                    - img [ref=e459]
+                - paragraph [ref=e461]: On startup, the app tries to connect to MySQL first.
+                - list [ref=e462]:
+                  - listitem [ref=e463]: If MySQL is available and credentials are correct, user data is stored in MySQL.
+                  - listitem [ref=e464]: If MySQL is unavailable or authentication fails, the app falls back to SQLite.
+                  - listitem [ref=e465]:
+                    - text: The SQLite fallback database is created at
+                    - code [ref=e466]: nlp_app/nlp_app.db
+                    - text: .
+                - paragraph [ref=e467]: This makes local development easier because the app can still run without a working MySQL server.
+                - generic [ref=e468]:
+                  - heading "Run the App" [level=2] [ref=e469]
+                  - 'link "Permalink: Run the App" [ref=e470] [cursor=pointer]':
+                    - /url: "#run-the-app"
+                    - img [ref=e471]
+                - paragraph [ref=e473]:
+                  - text: From the
+                  - code [ref=e474]: nlp_app
+                  - text: "directory:"
+                - generic [ref=e475]:
+                  - generic [ref=e476]: cd nlp_app python app.py
+                  - button "Copy" [ref=e478] [cursor=pointer]:
+                    - img [ref=e479]
+                - paragraph [ref=e482]: "You should then see Flask running at:"
+                - generic [ref=e483]:
+                  - code [ref=e485]: http://127.0.0.1:5000
+                  - button "Copy" [ref=e487] [cursor=pointer]:
+                    - img [ref=e488]
+                - paragraph [ref=e491]: Open that URL in your browser.
+                - generic [ref=e492]:
+                  - heading "Web Pages" [level=2] [ref=e493]
+                  - 'link "Permalink: Web Pages" [ref=e494] [cursor=pointer]':
+                    - /url: "#web-pages"
+                    - img [ref=e495]
+                - list [ref=e497]:
+                  - listitem [ref=e498]:
+                    - code [ref=e499]: /
+                    - text: "-> Login page"
+                  - listitem [ref=e500]:
+                    - code [ref=e501]: /register
+                    - text: "-> Registration page"
+                  - listitem [ref=e502]:
+                    - code [ref=e503]: /profile
+                    - text: "-> Dashboard after login"
+                - generic [ref=e504]:
+                  - heading "API Endpoints" [level=2] [ref=e505]
+                  - 'link "Permalink: API Endpoints" [ref=e506] [cursor=pointer]':
+                    - /url: "#api-endpoints"
+                    - img [ref=e507]
+                - paragraph [ref=e509]:
+                  - text: All NLP routes are available under
+                  - code [ref=e510]: /api
+                  - text: .
+                - generic [ref=e511]:
+                  - heading "POST /api/keywords" [level=3] [ref=e512]:
+                    - code [ref=e513]: POST /api/keywords
+                  - 'link "Permalink: POST /api/keywords" [ref=e514] [cursor=pointer]':
+                    - /url: "#post-apikeywords"
+                    - img [ref=e515]
+                - paragraph [ref=e517]: Extracts keywords from text.
+                - paragraph [ref=e518]: "Form fields:"
+                - list [ref=e519]:
+                  - listitem [ref=e520]:
+                    - code [ref=e521]: text
+                  - listitem [ref=e522]:
+                    - code [ref=e523]: top_n
+                    - text: optional, default
+                    - code [ref=e524]: "10"
+                - generic [ref=e525]:
+                  - heading "POST /api/ner" [level=3] [ref=e526]:
+                    - code [ref=e527]: POST /api/ner
+                  - 'link "Permalink: POST /api/ner" [ref=e528] [cursor=pointer]':
+                    - /url: "#post-apiner"
+                    - img [ref=e529]
+                - paragraph [ref=e531]: Extracts named entities from text.
+                - paragraph [ref=e532]: "Form fields:"
+                - list [ref=e533]:
+                  - listitem [ref=e534]:
+                    - code [ref=e535]: text
+                - generic [ref=e536]:
+                  - heading "POST /api/sentiment" [level=3] [ref=e537]:
+                    - code [ref=e538]: POST /api/sentiment
+                  - 'link "Permalink: POST /api/sentiment" [ref=e539] [cursor=pointer]':
+                    - /url: "#post-apisentiment"
+                    - img [ref=e540]
+                - paragraph [ref=e542]: Runs sentiment analysis.
+                - paragraph [ref=e543]: "Form fields:"
+                - list [ref=e544]:
+                  - listitem [ref=e545]:
+                    - code [ref=e546]: text
+                - generic [ref=e547]:
+                  - heading "POST /api/summarize" [level=3] [ref=e548]:
+                    - code [ref=e549]: POST /api/summarize
+                  - 'link "Permalink: POST /api/summarize" [ref=e550] [cursor=pointer]':
+                    - /url: "#post-apisummarize"
+                    - img [ref=e551]
+                - paragraph [ref=e553]: Summarizes long text.
+                - paragraph [ref=e554]: "Form fields:"
+                - list [ref=e555]:
+                  - listitem [ref=e556]:
+                    - code [ref=e557]: text
+                - generic [ref=e558]:
+                  - heading "POST /api/keywords-with-sentiment" [level=3] [ref=e559]:
+                    - code [ref=e560]: POST /api/keywords-with-sentiment
+                  - 'link "Permalink: POST /api/keywords-with-sentiment" [ref=e561] [cursor=pointer]':
+                    - /url: "#post-apikeywords-with-sentiment"
+                    - img [ref=e562]
+                - paragraph [ref=e564]: Returns both keywords and sentiment for the same text.
+                - paragraph [ref=e565]: "Form fields:"
+                - list [ref=e566]:
+                  - listitem [ref=e567]:
+                    - code [ref=e568]: text
+                  - listitem [ref=e569]:
+                    - code [ref=e570]: top_n
+                    - text: optional, default
+                    - code [ref=e571]: "10"
+                - generic [ref=e572]:
+                  - heading "POST /api/analyze" [level=3] [ref=e573]:
+                    - code [ref=e574]: POST /api/analyze
+                  - 'link "Permalink: POST /api/analyze" [ref=e575] [cursor=pointer]':
+                    - /url: "#post-apianalyze"
+                    - img [ref=e576]
+                - paragraph [ref=e578]: "Runs a combined pipeline for:"
+                - list [ref=e579]:
+                  - listitem [ref=e580]: summary
+                  - listitem [ref=e581]: sentiment
+                  - listitem [ref=e582]: keywords
+                  - listitem [ref=e583]: named entities
+                - paragraph [ref=e584]: "Form fields:"
+                - list [ref=e585]:
+                  - listitem [ref=e586]:
+                    - code [ref=e587]: text
+                  - listitem [ref=e588]:
+                    - code [ref=e589]: top_n
+                    - text: optional, default
+                    - code [ref=e590]: "10"
+                - generic [ref=e591]:
+                  - heading "Notes on Models" [level=2] [ref=e592]
+                  - 'link "Permalink: Notes on Models" [ref=e593] [cursor=pointer]':
+                    - /url: "#notes-on-models"
+                    - img [ref=e594]
+                - list [ref=e596]:
+                  - listitem [ref=e597]: Sentiment, summarization, and keyword models load on first use.
+                  - listitem [ref=e598]:
+                    - text: If models are not already cached locally, set
+                    - code [ref=e599]: ALLOW_MODEL_DOWNLOADS=1
+                    - text: to allow downloading them.
+                  - listitem [ref=e600]: If internet access is blocked and models are not cached, those endpoints will return informative errors instead of crashing the app.
+                  - listitem [ref=e601]:
+                    - text: NER requires the spaCy model
+                    - code [ref=e602]: en_core_web_md
+                    - text: to be installed locally.
+                - generic [ref=e603]:
+                  - heading "Common Issues" [level=2] [ref=e604]
+                  - 'link "Permalink: Common Issues" [ref=e605] [cursor=pointer]':
+                    - /url: "#common-issues"
+                    - img [ref=e606]
+                - generic [ref=e608]:
+                  - heading "MySQL access denied" [level=3] [ref=e609]
+                  - 'link "Permalink: MySQL access denied" [ref=e610] [cursor=pointer]':
+                    - /url: "#mysql-access-denied"
+                    - img [ref=e611]
+                - paragraph [ref=e613]: "If you see a MySQL authentication error, either:"
+                - list [ref=e614]:
+                  - listitem [ref=e615]:
+                    - text: set the correct
+                    - code [ref=e616]: DB_PASSWORD
+                    - text: ", or"
+                  - listitem [ref=e617]: continue using the automatic SQLite fallback for local development
+                - generic [ref=e618]:
+                  - heading "App starts but browser does not open" [level=3] [ref=e619]
+                  - 'link "Permalink: App starts but browser does not open" [ref=e620] [cursor=pointer]':
+                    - /url: "#app-starts-but-browser-does-not-open"
+                    - img [ref=e621]
+                - paragraph [ref=e623]: "Flask does not automatically open a browser window. Open:"
+                - generic [ref=e624]:
+                  - code [ref=e626]: http://127.0.0.1:5000
+                  - button "Copy" [ref=e628] [cursor=pointer]:
+                    - img [ref=e629]
+                - paragraph [ref=e632]: manually.
+                - generic [ref=e633]:
+                  - heading "High system load in VS Code" [level=3] [ref=e634]
+                  - 'link "Permalink: High system load in VS Code" [ref=e635] [cursor=pointer]':
+                    - /url: "#high-system-load-in-vs-code"
+                    - img [ref=e636]
+                - paragraph [ref=e638]:
+                  - text: If VS Code feels slow, avoid opening the large
+                  - code [ref=e639]: myenv
+                  - text: folder as indexed workspace content. This repository already includes workspace settings to reduce that overhead.
+                - generic [ref=e640]:
+                  - heading "Future Improvements" [level=2] [ref=e641]
+                  - 'link "Permalink: Future Improvements" [ref=e642] [cursor=pointer]':
+                    - /url: "#future-improvements"
+                    - img [ref=e643]
+                - list [ref=e645]:
+                  - listitem [ref=e646]:
+                    - text: Add a complete
+                    - code [ref=e647]: requirements.txt
+                    - text: for all NLP dependencies
+                  - listitem [ref=e648]: Add logout route and session cleanup
+                  - listitem [ref=e649]: Add better error handling in combined routes
+                  - listitem [ref=e650]: Add tests for API endpoints
+                  - listitem [ref=e651]: Add Docker support
+        - generic [ref=e655]:
+          - generic [ref=e658]:
+            - heading "About" [level=2] [ref=e659]
+            - generic [ref=e660]: No description, website, or topics provided.
+            - heading "Resources" [level=3] [ref=e661]
+            - link "Readme" [ref=e663] [cursor=pointer]:
+              - /url: "#readme-ov-file"
+              - img [ref=e664]
+              - text: Readme
+            - heading "License" [level=3] [ref=e666]
+            - link "MIT license" [ref=e668] [cursor=pointer]:
+              - /url: "#MIT-1-ov-file"
+              - img [ref=e669]
+              - text: MIT license
+            - link "Activity" [ref=e672] [cursor=pointer]:
+              - /url: /bhupinder94/NLP-APP/activity
+              - img [ref=e673]
+              - text: Activity
+            - heading "Stars" [level=3] [ref=e675]
+            - link "0 stars" [ref=e677] [cursor=pointer]:
+              - /url: /bhupinder94/NLP-APP/stargazers
+              - img [ref=e678]
+              - strong [ref=e680]: "0"
+              - text: stars
+            - heading "Watchers" [level=3] [ref=e681]
+            - link "0 watching" [ref=e683] [cursor=pointer]:
+              - /url: /bhupinder94/NLP-APP/watchers
+              - img [ref=e684]
+              - strong [ref=e686]: "0"
+              - text: watching
+            - heading "Forks" [level=3] [ref=e687]
+            - link "0 forks" [ref=e689] [cursor=pointer]:
+              - /url: /bhupinder94/NLP-APP/forks
+              - img [ref=e690]
+              - strong [ref=e692]: "0"
+              - text: forks
+            - link "Report repository" [ref=e694] [cursor=pointer]:
+              - /url: /contact/report-content?content_url=https%3A%2F%2Fgithub.com%2Fbhupinder94%2FNLP-APP&report=bhupinder94+%28user%29
+          - generic [ref=e696]:
+            - heading "Releases" [level=2] [ref=e697]:
+              - link "Releases" [ref=e698] [cursor=pointer]:
+                - /url: /bhupinder94/NLP-APP/releases
+            - generic [ref=e699]: No releases published
+          - generic [ref=e701]:
+            - heading "Packages" [level=2] [ref=e702]:
+              - link "Packages" [ref=e703] [cursor=pointer]:
+                - /url: /users/bhupinder94/packages?repo_name=NLP-APP
+            - generic [ref=e704]: No packages published
+          - generic [ref=e706]:
+            - heading "Contributors 1" [level=2] [ref=e707]:
+              - link "Contributors 1" [ref=e708] [cursor=pointer]:
+                - /url: /bhupinder94/NLP-APP/graphs/contributors
+                - text: Contributors
+                - generic "1" [ref=e709]
+            - list [ref=e710]:
+              - listitem [ref=e711]:
+                - link "@bhupinder94" [ref=e712] [cursor=pointer]:
+                  - /url: https://github.com/bhupinder94
+                  - img "@bhupinder94" [ref=e713]
+                - link "bhupinder94 Bhupinder Garg" [ref=e715] [cursor=pointer]:
+                  - /url: https://github.com/bhupinder94
+                  - strong [ref=e716]: bhupinder94
+                  - text: Bhupinder Garg
+          - generic [ref=e718]:
+            - heading "Languages" [level=2] [ref=e719]
+            - list [ref=e724]:
+              - listitem [ref=e725]:
+                - link "HTML 60.2%" [ref=e726] [cursor=pointer]:
+                  - /url: /bhupinder94/NLP-APP/search?l=html
+                  - img [ref=e727]
+                  - generic [ref=e729]: HTML
+                  - generic [ref=e730]: 60.2%
+              - listitem [ref=e731]:
+                - link "Python 39.8%" [ref=e732] [cursor=pointer]:
+                  - /url: /bhupinder94/NLP-APP/search?l=python
+                  - img [ref=e733]
+                  - generic [ref=e735]: Python
+                  - generic [ref=e736]: 39.8%
+  - contentinfo [ref=e738]:
+    - heading "Footer" [level=2] [ref=e739]
+    - generic [ref=e740]:
+      - generic [ref=e741]:
+        - link "GitHub Homepage" [ref=e742] [cursor=pointer]:
+          - /url: https://github.com
+          - img [ref=e743]
+        - generic [ref=e745]: © 2026 GitHub, Inc.
+      - navigation "Footer" [ref=e746]:
+        - heading "Footer navigation" [level=3] [ref=e747]
+        - list "Footer navigation" [ref=e748]:
+          - listitem [ref=e749]:
+            - link "Terms" [ref=e750] [cursor=pointer]:
+              - /url: https://docs.github.com/site-policy/github-terms/github-terms-of-service
+          - listitem [ref=e751]:
+            - link "Privacy" [ref=e752] [cursor=pointer]:
+              - /url: https://docs.github.com/site-policy/privacy-policies/github-privacy-statement
+          - listitem [ref=e753]:
+            - link "Security" [ref=e754] [cursor=pointer]:
+              - /url: https://github.com/security
+          - listitem [ref=e755]:
+            - link "Status" [ref=e756] [cursor=pointer]:
+              - /url: https://www.githubstatus.com/
+          - listitem [ref=e757]:
+            - link "Community" [ref=e758] [cursor=pointer]:
+              - /url: https://github.community/
+          - listitem [ref=e759]:
+            - link "Docs" [ref=e760] [cursor=pointer]:
+              - /url: https://docs.github.com/
+          - listitem [ref=e761]:
+            - link "Contact" [ref=e762] [cursor=pointer]:
+              - /url: https://support.github.com?tags=dotcom-footer
+          - listitem [ref=e763]:
+            - button "Manage cookies" [ref=e765] [cursor=pointer]
+          - listitem [ref=e766]:
+            - button "Do not share my personal information" [ref=e768] [cursor=pointer]

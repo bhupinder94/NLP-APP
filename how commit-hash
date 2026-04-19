@@ -1,0 +1,7 @@
+[33m2edf111[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m message
+[33me93745c[m[33m ([m[1;31morigin/main[m[33m)[m Merge branch 'main' of https://github.com/bhupinder94/NLP-APP
+[33m044a5af[m Add NLP features: summarizer, sentiment, NER, keywords with pipeline and improved UI
+[33mab6ac03[m[33m ([m[1;32mstar-geography[m[33m, [m[1;32mjelly-dish[m[33m)[m Update README.md
+[33mbb4bdda[m Add MIT license
+[33me3e1e26[m Add README for TextChar AI
+[33m43cbcda[m Intial commit

@@ -1,0 +1,351 @@
+- generic [ref=e2]:
+  - region
+  - generic [ref=e3]:
+    - link "Skip to content" [ref=e4] [cursor=pointer]:
+      - /url: "#start-of-content"
+    - banner [ref=e6]:
+      - heading "Navigation Menu" [level=2] [ref=e7]
+      - generic [ref=e8]:
+        - link "Homepage" [ref=e10] [cursor=pointer]:
+          - /url: /
+          - img [ref=e11]
+        - generic [ref=e13]:
+          - navigation "Global" [ref=e16]:
+            - list [ref=e17]:
+              - listitem [ref=e18]:
+                - button "Platform" [ref=e20] [cursor=pointer]:
+                  - text: Platform
+                  - img [ref=e21]
+              - listitem [ref=e23]:
+                - button "Solutions" [ref=e25] [cursor=pointer]:
+                  - text: Solutions
+                  - img [ref=e26]
+              - listitem [ref=e28]:
+                - button "Resources" [ref=e30] [cursor=pointer]:
+                  - text: Resources
+                  - img [ref=e31]
+              - listitem [ref=e33]:
+                - button "Open Source" [ref=e35] [cursor=pointer]:
+                  - text: Open Source
+                  - img [ref=e36]
+              - listitem [ref=e38]:
+                - button "Enterprise" [ref=e40] [cursor=pointer]:
+                  - text: Enterprise
+                  - img [ref=e41]
+              - listitem [ref=e43]:
+                - link "Pricing" [ref=e44] [cursor=pointer]:
+                  - /url: https://github.com/pricing
+                  - generic [ref=e45]: Pricing
+          - generic [ref=e46]:
+            - button "Search or jump to…" [ref=e49] [cursor=pointer]:
+              - img [ref=e51]
+            - link "Sign in" [ref=e54] [cursor=pointer]:
+              - /url: /login?return_to=https%3A%2F%2Fgithub.com%2Fbhupinder94%2FNLP-APP%2Fcommits%2Fmain%2F
+            - link "Sign up" [ref=e55] [cursor=pointer]:
+              - /url: /signup?ref_cta=Sign+up&ref_loc=header+logged+out&ref_page=%2F%3Cuser-name%3E%2F%3Crepo-name%3E%2Fcommits%2Fshow&source=header-repo&source_repo=bhupinder94%2FNLP-APP
+            - button "Appearance settings" [ref=e58] [cursor=pointer]:
+              - img
+  - main [ref=e62]:
+    - generic [ref=e63]:
+      - generic [ref=e64]:
+        - generic [ref=e66]:
+          - img [ref=e67]
+          - link "bhupinder94" [ref=e70] [cursor=pointer]:
+            - /url: /bhupinder94
+          - generic [ref=e71]: /
+          - strong [ref=e72]:
+            - link "NLP-APP" [ref=e73] [cursor=pointer]:
+              - /url: /bhupinder94/NLP-APP
+          - generic [ref=e74]: Public
+        - generic [ref=e75]:
+          - list:
+            - listitem [ref=e76]:
+              - link "You must be signed in to change notification settings" [ref=e77] [cursor=pointer]:
+                - /url: /login?return_to=%2Fbhupinder94%2FNLP-APP
+                - img [ref=e78]
+                - text: Notifications
+            - listitem [ref=e80]:
+              - link "Fork 0" [ref=e81] [cursor=pointer]:
+                - /url: /login?return_to=%2Fbhupinder94%2FNLP-APP
+                - img [ref=e82]
+                - text: Fork
+                - generic "0" [ref=e84]
+            - listitem [ref=e85]:
+              - link "You must be signed in to star a repository" [ref=e87] [cursor=pointer]:
+                - /url: /login?return_to=%2Fbhupinder94%2FNLP-APP
+                - img [ref=e88]
+                - text: Star
+                - generic "0 users starred this repository" [ref=e90]: "0"
+      - navigation "Repository" [ref=e91]:
+        - list [ref=e92]:
+          - listitem [ref=e93]:
+            - link "Code" [ref=e94] [cursor=pointer]:
+              - /url: /bhupinder94/NLP-APP
+              - img [ref=e95]
+              - generic [ref=e97]: Code
+          - listitem [ref=e98]:
+            - link "Issues" [ref=e99] [cursor=pointer]:
+              - /url: /bhupinder94/NLP-APP/issues
+              - img [ref=e100]
+              - generic [ref=e103]: Issues
+          - listitem [ref=e104]:
+            - link "Pull requests" [ref=e105] [cursor=pointer]:
+              - /url: /bhupinder94/NLP-APP/pulls
+              - img [ref=e106]
+              - generic [ref=e108]: Pull requests
+          - listitem [ref=e109]:
+            - link "Actions" [ref=e110] [cursor=pointer]:
+              - /url: /bhupinder94/NLP-APP/actions
+              - img [ref=e111]
+              - generic [ref=e113]: Actions
+          - listitem [ref=e114]:
+            - link "Projects" [ref=e115] [cursor=pointer]:
+              - /url: /bhupinder94/NLP-APP/projects
+              - img [ref=e116]
+              - generic [ref=e118]: Projects
+          - listitem [ref=e119]:
+            - link "Security and quality" [ref=e120] [cursor=pointer]:
+              - /url: /bhupinder94/NLP-APP/security
+              - img [ref=e121]
+              - generic [ref=e123]: Security and quality
+          - listitem [ref=e124]:
+            - link "Insights" [ref=e125] [cursor=pointer]:
+              - /url: /bhupinder94/NLP-APP/pulse
+              - img [ref=e126]
+              - generic [ref=e128]: Insights
+    - generic [ref=e134]:
+      - heading "Commits" [level=1] [ref=e138]
+      - generic [ref=e143]:
+        - generic [ref=e144]:
+          - heading "Branch selector" [level=2] [ref=e145]
+          - button "main branch" [ref=e146] [cursor=pointer]:
+            - generic [ref=e147]:
+              - generic [ref=e149]:
+                - img [ref=e151]
+                - generic [ref=e154]: main
+              - generic:
+                - img
+          - generic [ref=e155]:
+            - heading "User selector" [level=2] [ref=e156]
+            - button "All users" [ref=e158] [cursor=pointer]:
+              - generic [ref=e161]:
+                - img [ref=e163]
+                - generic [ref=e165]: All users
+              - generic:
+                - img
+            - heading "Datepicker" [level=2] [ref=e166]
+            - button "All time" [ref=e167] [cursor=pointer]:
+              - generic [ref=e168]:
+                - generic:
+                  - img
+                - generic [ref=e169]: All time
+                - generic:
+                  - img
+        - generic [ref=e170]:
+          - heading "Commit History" [level=2] [ref=e171]
+          - generic [ref=e172]:
+            - generic [ref=e173]:
+              - img [ref=e176]
+              - generic [ref=e178]:
+                - heading "Commits on Apr 19, 2026" [level=3] [ref=e179]
+                - list "Commits on Apr 19, 2026" [ref=e182]:
+                  - listitem "Merge branch 'main' of https://github.com/bhupinder94/NLP-APP. More information available below." [ref=e183]:
+                    - heading "Merge branch 'main' of https://github.com/bhupinder94/NLP-APP" [level=4] [ref=e185]:
+                      - generic [ref=e186]:
+                        - link "Merge branch 'main' of" [ref=e187] [cursor=pointer]:
+                          - /url: /bhupinder94/NLP-APP/commit/e93745cc0fc877975c52bf7a359259ee22cb085a
+                        - link "https://github.com/bhupinder94/NLP-APP" [ref=e188] [cursor=pointer]:
+                          - /url: https://github.com/bhupinder94/NLP-APP
+                    - generic [ref=e193]:
+                      - generic [ref=e194]:
+                        - link "bhupinder94" [ref=e195] [cursor=pointer]:
+                          - /url: /bhupinder94
+                          - img "bhupinder94" [ref=e196]
+                        - link "commits by bhupinder94" [ref=e197] [cursor=pointer]:
+                          - /url: /bhupinder94/NLP-APP/commits?author=bhupinder94
+                          - text: bhupinder94
+                      - generic [ref=e198]: committed
+                      - generic "Apr 19, 2026, 3:46 PM GMT+5:30" [ref=e199]: Apr 19, 202648 minutes ago
+                    - generic [ref=e204]:
+                      - generic [ref=e205]:
+                        - tooltip "View commit details" [ref=e206]:
+                          - link "e93745c" [ref=e207] [cursor=pointer]:
+                            - /url: /bhupinder94/NLP-APP/commit/e93745cc0fc877975c52bf7a359259ee22cb085a
+                            - generic [ref=e209]: e93745c
+                        - button "Copy full SHA for e93745c" [ref=e211] [cursor=pointer]:
+                          - img [ref=e212]
+                      - tooltip "Browse repository at this point" [ref=e215]:
+                        - link "Browse repository at this point" [ref=e216] [cursor=pointer]:
+                          - /url: /bhupinder94/NLP-APP/tree/e93745cc0fc877975c52bf7a359259ee22cb085a
+                          - img [ref=e217]
+                  - 'listitem "Add NLP features: summarizer, sentiment, NER, keywords with pipeline and improved UI. More information available below." [ref=e219]':
+                    - 'heading "Add NLP features: summarizer, sentiment, NER, keywords with pipeline and improved UI" [level=4] [ref=e221]':
+                      - 'link "Add NLP features: summarizer, sentiment, NER, keywords with pipeline and improved UI" [ref=e223] [cursor=pointer]':
+                        - /url: /bhupinder94/NLP-APP/commit/044a5af8d4f48ea67e262db77714da577fff55a5
+                    - generic [ref=e228]:
+                      - generic [ref=e229]:
+                        - link "bhupinder94" [ref=e230] [cursor=pointer]:
+                          - /url: /bhupinder94
+                          - img "bhupinder94" [ref=e231]
+                        - link "commits by bhupinder94" [ref=e232] [cursor=pointer]:
+                          - /url: /bhupinder94/NLP-APP/commits?author=bhupinder94
+                          - text: bhupinder94
+                      - generic [ref=e233]: committed
+                      - generic "Apr 19, 2026, 3:41 PM GMT+5:30" [ref=e234]: Apr 19, 202653 minutes ago
+                    - generic [ref=e239]:
+                      - generic [ref=e240]:
+                        - tooltip "View commit details" [ref=e241]:
+                          - link "044a5af" [ref=e242] [cursor=pointer]:
+                            - /url: /bhupinder94/NLP-APP/commit/044a5af8d4f48ea67e262db77714da577fff55a5
+                            - generic [ref=e244]: 044a5af
+                        - button "Copy full SHA for 044a5af" [ref=e246] [cursor=pointer]:
+                          - img [ref=e247]
+                      - tooltip "Browse repository at this point" [ref=e250]:
+                        - link "Browse repository at this point" [ref=e251] [cursor=pointer]:
+                          - /url: /bhupinder94/NLP-APP/tree/044a5af8d4f48ea67e262db77714da577fff55a5
+                          - img [ref=e252]
+            - generic [ref=e254]:
+              - img [ref=e257]
+              - generic [ref=e259]:
+                - heading "Commits on Apr 18, 2026" [level=3] [ref=e260]
+                - list "Commits on Apr 18, 2026" [ref=e263]:
+                  - listitem "Update README.md. More information available below." [ref=e264]:
+                    - heading "Update README.md" [level=4] [ref=e266]:
+                      - link "Update README.md" [ref=e268] [cursor=pointer]:
+                        - /url: /bhupinder94/NLP-APP/commit/ab6ac03e9db4736b3848877affca4d1aa8324e3c
+                    - generic [ref=e273]:
+                      - generic [ref=e274]:
+                        - link "bhupinder94" [ref=e275] [cursor=pointer]:
+                          - /url: /bhupinder94
+                          - img "bhupinder94" [ref=e276]
+                        - link "commits by bhupinder94" [ref=e277] [cursor=pointer]:
+                          - /url: /bhupinder94/NLP-APP/commits?author=bhupinder94
+                          - text: bhupinder94
+                      - generic [ref=e278]: authored
+                      - generic "Apr 18, 2026, 9:48 AM GMT+5:30" [ref=e279]: Apr 18, 2026yesterday
+                    - generic [ref=e284]:
+                      - generic [ref=e285]:
+                        - tooltip "View commit details" [ref=e286]:
+                          - link "ab6ac03" [ref=e287] [cursor=pointer]:
+                            - /url: /bhupinder94/NLP-APP/commit/ab6ac03e9db4736b3848877affca4d1aa8324e3c
+                            - generic [ref=e289]: ab6ac03
+                        - button "Copy full SHA for ab6ac03" [ref=e291] [cursor=pointer]:
+                          - img [ref=e292]
+                      - tooltip "Browse repository at this point" [ref=e295]:
+                        - link "Browse repository at this point" [ref=e296] [cursor=pointer]:
+                          - /url: /bhupinder94/NLP-APP/tree/ab6ac03e9db4736b3848877affca4d1aa8324e3c
+                          - img [ref=e297]
+                  - listitem "Add MIT license. More information available below." [ref=e299]:
+                    - heading "Add MIT license" [level=4] [ref=e301]:
+                      - link "Add MIT license" [ref=e303] [cursor=pointer]:
+                        - /url: /bhupinder94/NLP-APP/commit/bb4bdda5e141f7313123c8fd028018f922f7bd52
+                    - generic [ref=e308]:
+                      - generic [ref=e309]:
+                        - link "bhupinder94" [ref=e310] [cursor=pointer]:
+                          - /url: /bhupinder94
+                          - img "bhupinder94" [ref=e311]
+                        - link "commits by bhupinder94" [ref=e312] [cursor=pointer]:
+                          - /url: /bhupinder94/NLP-APP/commits?author=bhupinder94
+                          - text: bhupinder94
+                      - generic [ref=e313]: committed
+                      - generic "Apr 18, 2026, 6:39 AM GMT+5:30" [ref=e314]: Apr 18, 2026yesterday
+                    - generic [ref=e319]:
+                      - generic [ref=e320]:
+                        - tooltip "View commit details" [ref=e321]:
+                          - link "bb4bdda" [ref=e322] [cursor=pointer]:
+                            - /url: /bhupinder94/NLP-APP/commit/bb4bdda5e141f7313123c8fd028018f922f7bd52
+                            - generic [ref=e324]: bb4bdda
+                        - button "Copy full SHA for bb4bdda" [ref=e326] [cursor=pointer]:
+                          - img [ref=e327]
+                      - tooltip "Browse repository at this point" [ref=e330]:
+                        - link "Browse repository at this point" [ref=e331] [cursor=pointer]:
+                          - /url: /bhupinder94/NLP-APP/tree/bb4bdda5e141f7313123c8fd028018f922f7bd52
+                          - img [ref=e332]
+                  - listitem "Add README for TextChar AI. More information available below." [ref=e334]:
+                    - heading "Add README for TextChar AI" [level=4] [ref=e336]:
+                      - link "Add README for TextChar AI" [ref=e338] [cursor=pointer]:
+                        - /url: /bhupinder94/NLP-APP/commit/e3e1e26f1951b6c44cf17258fd5ac9697be2da31
+                    - generic [ref=e343]:
+                      - generic [ref=e344]:
+                        - link "bhupinder94" [ref=e345] [cursor=pointer]:
+                          - /url: /bhupinder94
+                          - img "bhupinder94" [ref=e346]
+                        - link "commits by bhupinder94" [ref=e347] [cursor=pointer]:
+                          - /url: /bhupinder94/NLP-APP/commits?author=bhupinder94
+                          - text: bhupinder94
+                      - generic [ref=e348]: committed
+                      - generic "Apr 18, 2026, 6:19 AM GMT+5:30" [ref=e349]: Apr 18, 2026yesterday
+                    - generic [ref=e354]:
+                      - generic [ref=e355]:
+                        - tooltip "View commit details" [ref=e356]:
+                          - link "e3e1e26" [ref=e357] [cursor=pointer]:
+                            - /url: /bhupinder94/NLP-APP/commit/e3e1e26f1951b6c44cf17258fd5ac9697be2da31
+                            - generic [ref=e359]: e3e1e26
+                        - button "Copy full SHA for e3e1e26" [ref=e361] [cursor=pointer]:
+                          - img [ref=e362]
+                      - tooltip "Browse repository at this point" [ref=e365]:
+                        - link "Browse repository at this point" [ref=e366] [cursor=pointer]:
+                          - /url: /bhupinder94/NLP-APP/tree/e3e1e26f1951b6c44cf17258fd5ac9697be2da31
+                          - img [ref=e367]
+                  - listitem "Intial commit. More information available below." [ref=e369]:
+                    - heading "Intial commit" [level=4] [ref=e371]:
+                      - link "Intial commit" [ref=e373] [cursor=pointer]:
+                        - /url: /bhupinder94/NLP-APP/commit/43cbcda77ad2680e8f4ba346a7639ad30a65ad5c
+                    - generic [ref=e378]:
+                      - generic [ref=e379]:
+                        - link "bhupinder94" [ref=e380] [cursor=pointer]:
+                          - /url: /bhupinder94
+                          - img "bhupinder94" [ref=e381]
+                        - link "commits by bhupinder94" [ref=e382] [cursor=pointer]:
+                          - /url: /bhupinder94/NLP-APP/commits?author=bhupinder94
+                          - text: bhupinder94
+                      - generic [ref=e383]: committed
+                      - generic "Apr 18, 2026, 6:06 AM GMT+5:30" [ref=e384]: Apr 18, 2026yesterday
+                    - generic [ref=e389]:
+                      - generic [ref=e390]:
+                        - tooltip "View commit details" [ref=e391]:
+                          - link "43cbcda" [ref=e392] [cursor=pointer]:
+                            - /url: /bhupinder94/NLP-APP/commit/43cbcda77ad2680e8f4ba346a7639ad30a65ad5c
+                            - generic [ref=e394]: 43cbcda
+                        - button "Copy full SHA for 43cbcda" [ref=e396] [cursor=pointer]:
+                          - img [ref=e397]
+                      - tooltip "Browse repository at this point" [ref=e400]:
+                        - link "Browse repository at this point" [ref=e401] [cursor=pointer]:
+                          - /url: /bhupinder94/NLP-APP/tree/43cbcda77ad2680e8f4ba346a7639ad30a65ad5c
+                          - img [ref=e402]
+  - contentinfo [ref=e404]:
+    - heading "Footer" [level=2] [ref=e405]
+    - generic [ref=e406]:
+      - generic [ref=e407]:
+        - link "GitHub Homepage" [ref=e408] [cursor=pointer]:
+          - /url: https://github.com
+          - img [ref=e409]
+        - generic [ref=e411]: © 2026 GitHub, Inc.
+      - navigation "Footer" [ref=e412]:
+        - heading "Footer navigation" [level=3] [ref=e413]
+        - list "Footer navigation" [ref=e414]:
+          - listitem [ref=e415]:
+            - link "Terms" [ref=e416] [cursor=pointer]:
+              - /url: https://docs.github.com/site-policy/github-terms/github-terms-of-service
+          - listitem [ref=e417]:
+            - link "Privacy" [ref=e418] [cursor=pointer]:
+              - /url: https://docs.github.com/site-policy/privacy-policies/github-privacy-statement
+          - listitem [ref=e419]:
+            - link "Security" [ref=e420] [cursor=pointer]:
+              - /url: https://github.com/security
+          - listitem [ref=e421]:
+            - link "Status" [ref=e422] [cursor=pointer]:
+              - /url: https://www.githubstatus.com/
+          - listitem [ref=e423]:
+            - link "Community" [ref=e424] [cursor=pointer]:
+              - /url: https://github.community/
+          - listitem [ref=e425]:
+            - link "Docs" [ref=e426] [cursor=pointer]:
+              - /url: https://docs.github.com/
+          - listitem [ref=e427]:
+            - link "Contact" [ref=e428] [cursor=pointer]:
+              - /url: https://support.github.com?tags=dotcom-footer
+          - listitem [ref=e429]:
+            - button "Manage cookies" [ref=e431] [cursor=pointer]
+          - listitem [ref=e432]:
+            - button "Do not share my personal information" [ref=e434] [cursor=pointer]

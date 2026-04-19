@@ -30,12 +30,11 @@ MAX_TOKENS = 384
 
 
 def _summary_bounds(token_count):
-    # Keep summary limits proportional to the source length so short inputs
-    # don't produce oversized or unstable summaries.
-    max_length = max(28, min(120, token_count // 3))
-    min_length = max(10, min(50, max_length // 2))
+    # Increased bounds for longer, more informative summaries
+    max_length = max(64, min(200, token_count // 2))
+    min_length = max(32, min(80, max_length // 2))
     if min_length >= max_length:
-        min_length = max(8, max_length - 10)
+        min_length = max(24, max_length - 20)
     return min_length, max_length
 
 # UTITLITY: chunk text safely
