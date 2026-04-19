@@ -17,8 +17,8 @@ def _is_cuda_error(exc):
  
 # Load summarization model
 
-PRIMARY_MODEL_NAME = os.getenv("SUMMARIZER_MODEL", "sshleifer/distilbart-cnn-12-6")
-FALLBACK_MODEL_NAMES = [PRIMARY_MODEL_NAME, "facebook/bart-large-cnn"]
+PRIMARY_MODEL_NAME = os.getenv("SUMMARIZER_MODEL", "google/pegasus-xsum")
+FALLBACK_MODEL_NAMES = [PRIMARY_MODEL_NAME, "sshleifer/distilbart-cnn-12-6", "facebook/bart-large-cnn"]
 ALLOW_MODEL_DOWNLOADS = os.getenv("ALLOW_MODEL_DOWNLOADS", "0") == "1"
 
 summarizer = None
@@ -149,7 +149,7 @@ def summarize_long_text(text):
     chunks = chunk_text(text)
     token_count = len(text.split())
 
-    # Short text > summarize directly
+    # Direct summarization - skip hierarchical for speed
     if len(chunks) == 1:
        if token_count < 40:
            return text.strip()
@@ -157,15 +157,9 @@ def summarize_long_text(text):
        min_length, max_length = _summary_bounds(token_count)
        return _run_summary(text, min_length, max_length)
 
-    # Long text = hierarchical summarization
+    # Simple concatenation for multi-chunk - just combine all summaries
     chunk_summaries = summarize_chunks(chunks)
-
-    combined_summary_text = " ".join(chunk_summaries)
-
-    combined_token_count = len(combined_summary_text.split())
-    min_length, max_length = _summary_bounds(combined_token_count)
-    final_summary = _run_summary(combined_summary_text, min_length, max_length)
-    return final_summary
+    return " ".join(chunk_summaries)
  
 
     
