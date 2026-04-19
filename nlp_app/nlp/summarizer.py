@@ -26,15 +26,15 @@ tokenizer = None
 summarizer_error = None
 device_id = _requested_device()
 
-MAX_TOKENS = 384
+MAX_TOKENS = 512  # Larger chunks = fewer chunks = faster
 
 
 def _summary_bounds(token_count):
-    # Increased bounds for longer, more informative summaries
-    max_length = max(64, min(200, token_count // 2))
-    min_length = max(32, min(80, max_length // 2))
+    # Much larger bounds for longer, more informative summaries
+    max_length = max(100, min(280, token_count // 2))
+    min_length = max(50, min(120, max_length // 2))
     if min_length >= max_length:
-        min_length = max(24, max_length - 20)
+        min_length = max(40, max_length - 30)
     return min_length, max_length
 
 # UTITLITY: chunk text safely
