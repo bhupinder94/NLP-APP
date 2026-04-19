@@ -259,6 +259,4 @@ If VS Code feels slow, avoid opening the large `myenv` folder as indexed workspa
 - Add tests for API endpoints
 - Add Docker support
 
-## License
 
-This project currently does not include a license file.
