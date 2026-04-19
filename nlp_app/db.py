@@ -1,3 +1,4 @@
+import json
 import os
 import sqlite3
 
@@ -87,6 +88,116 @@ class Database:
         conn.commit()
         cursor.close()
         conn.close()
+
+    def create_analysis_history_table(self):
+        conn = self.connect()
+        cursor = conn.cursor()
+        if self.backend == 'sqlite':
+            cursor.execute("""
+                CREATE TABLE IF NOT EXISTS analysis_history (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    user_id INTEGER NOT NULL,
+                    analysis_type TEXT NOT NULL,
+                    input_text TEXT NOT NULL,
+                    result_json TEXT NOT NULL,
+                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                    FOREIGN KEY (user_id) REFERENCES users(id)
+                )
+            """)
+        else:
+            cursor.execute("""
+                CREATE TABLE IF NOT EXISTS analysis_history (
+                    id INT AUTO_INCREMENT PRIMARY KEY,
+                    user_id INT NOT NULL,
+                    analysis_type VARCHAR(100) NOT NULL,
+                    input_text LONGTEXT NOT NULL,
+                    result_json LONGTEXT NOT NULL,
+                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                    FOREIGN KEY (user_id) REFERENCES users(id)
+                )
+            """)
+        conn.commit()
+        cursor.close()
+        conn.close()
+
+    @staticmethod
+    def _make_preview(text, limit=180):
+        if not text:
+            return ""
+        compact = " ".join(str(text).split())
+        return compact if len(compact) <= limit else f"{compact[:limit].rstrip()}..."
+
+    def save_analysis_history(self, user_id, analysis_type, input_text, result_payload):
+        serialized_result = json.dumps(result_payload, ensure_ascii=True)
+        conn = self.connect()
+        cursor = conn.cursor()
+        if self.backend == 'sqlite':
+            cursor.execute(
+                """
+                INSERT INTO analysis_history (user_id, analysis_type, input_text, result_json)
+                VALUES (?, ?, ?, ?)
+                """,
+                (user_id, analysis_type, input_text, serialized_result)
+            )
+        else:
+            cursor.execute(
+                """
+                INSERT INTO analysis_history (user_id, analysis_type, input_text, result_json)
+                VALUES (%s, %s, %s, %s)
+                """,
+                (user_id, analysis_type, input_text, serialized_result)
+            )
+        conn.commit()
+        cursor.close()
+        conn.close()
+
+    def get_user_analysis_history(self, user_id, limit=10):
+        conn = self.connect()
+        if self.backend == 'sqlite':
+            cursor = conn.cursor()
+            cursor.execute(
+                """
+                SELECT id, user_id, analysis_type, input_text, result_json, created_at
+                FROM analysis_history
+                WHERE user_id = ?
+                ORDER BY created_at DESC, id DESC
+                LIMIT ?
+                """,
+                (user_id, limit)
+            )
+        else:
+            cursor = conn.cursor(dictionary=True)
+            cursor.execute(
+                """
+                SELECT id, user_id, analysis_type, input_text, result_json, created_at
+                FROM analysis_history
+                WHERE user_id = %s
+                ORDER BY created_at DESC, id DESC
+                LIMIT %s
+                """,
+                (user_id, limit)
+            )
+
+        rows = cursor.fetchall()
+        cursor.close()
+        conn.close()
+
+        history_items = []
+        for row in rows:
+            item = dict(row) if self.backend == 'sqlite' else row
+            result_preview = self._make_preview(item.get('result_json', ''))
+            created_at = item.get('created_at')
+            history_items.append({
+                'id': item['id'],
+                'user_id': item['user_id'],
+                'analysis_type': item['analysis_type'],
+                'analysis_label': item['analysis_type'].replace('-', ' ').title(),
+                'input_preview': self._make_preview(item.get('input_text', '')),
+                'result_preview': result_preview,
+                'created_at': str(created_at) if created_at is not None else ''
+            })
+
+        return history_items
 
 
     def add_user(self, first_name, last_name, email, password):

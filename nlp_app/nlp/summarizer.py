@@ -5,18 +5,38 @@ from transformers import AutoModelForSeq2SeqLM, AutoTokenizer, pipeline
 
 # Device selection
 
-DEVICE = 0 if torch.cuda.is_available() else -1
- 
-# Load summerization model
+def _requested_device():
+    requested = os.getenv("NLP_DEVICE", "cpu").strip().lower()
+    if requested == "cuda" and torch.cuda.is_available():
+        return 0
+    return -1
 
-MODEL_NAME = "facebook/bart-large-cnn"
+
+def _is_cuda_error(exc):
+    return "cuda" in str(exc).lower()
+ 
+# Load summarization model
+
+PRIMARY_MODEL_NAME = os.getenv("SUMMARIZER_MODEL", "sshleifer/distilbart-cnn-12-6")
+FALLBACK_MODEL_NAMES = [PRIMARY_MODEL_NAME, "facebook/bart-large-cnn"]
 ALLOW_MODEL_DOWNLOADS = os.getenv("ALLOW_MODEL_DOWNLOADS", "0") == "1"
 
 summarizer = None
 tokenizer = None
 summarizer_error = None
+device_id = _requested_device()
 
-MAX_TOKENS = 512
+MAX_TOKENS = 384
+
+
+def _summary_bounds(token_count):
+    # Keep summary limits proportional to the source length so short inputs
+    # don't produce oversized or unstable summaries.
+    max_length = max(28, min(120, token_count // 3))
+    min_length = max(10, min(50, max_length // 2))
+    if min_length >= max_length:
+        min_length = max(8, max_length - 10)
+    return min_length, max_length
 
 # UTITLITY: chunk text safely
 
@@ -24,24 +44,30 @@ def load_summarizer_resources():
     global summarizer, tokenizer, summarizer_error
 
     if (summarizer is None or tokenizer is None) and summarizer_error is None:
-        try:
-            loaded_tokenizer = AutoTokenizer.from_pretrained(
-                MODEL_NAME,
-                local_files_only=not ALLOW_MODEL_DOWNLOADS
-            )
-            loaded_model = AutoModelForSeq2SeqLM.from_pretrained(
-                MODEL_NAME,
-                local_files_only=not ALLOW_MODEL_DOWNLOADS
-            )
-            summarizer = pipeline(
-                "summarization",
-                model=loaded_model,
-                tokenizer=loaded_tokenizer,
-                device=DEVICE
-            )
-            tokenizer = loaded_tokenizer
-        except Exception as exc:
-            summarizer_error = exc
+        last_error = None
+        for model_name in dict.fromkeys(FALLBACK_MODEL_NAMES):
+            try:
+                loaded_tokenizer = AutoTokenizer.from_pretrained(
+                    model_name,
+                    local_files_only=not ALLOW_MODEL_DOWNLOADS
+                )
+                loaded_model = AutoModelForSeq2SeqLM.from_pretrained(
+                    model_name,
+                    local_files_only=not ALLOW_MODEL_DOWNLOADS
+                )
+                summarizer = pipeline(
+                    "summarization",
+                    model=loaded_model,
+                    tokenizer=loaded_tokenizer,
+                    device=device_id
+                )
+                tokenizer = loaded_tokenizer
+                break
+            except Exception as exc:
+                last_error = exc
+
+        if summarizer is None or tokenizer is None:
+            summarizer_error = last_error
 
     if summarizer_error is not None:
         raise RuntimeError(
@@ -49,6 +75,38 @@ def load_summarizer_resources():
         ) from summarizer_error
 
     return summarizer, tokenizer
+
+
+def _switch_to_cpu():
+    global summarizer, tokenizer, summarizer_error, device_id
+    if device_id == -1:
+        return
+    device_id = -1
+    summarizer = None
+    tokenizer = None
+    summarizer_error = None
+
+
+def _run_summary(text, min_length, max_length):
+    loaded_summarizer, _ = load_summarizer_resources()
+    try:
+        return loaded_summarizer(
+            text,
+            max_length=max_length,
+            min_length=min_length,
+            do_sample=False
+        )[0]["summary_text"]
+    except Exception as exc:
+        if _is_cuda_error(exc):
+            _switch_to_cpu()
+            loaded_summarizer, _ = load_summarizer_resources()
+            return loaded_summarizer(
+                text,
+                max_length=max_length,
+                min_length=min_length,
+                do_sample=False
+            )[0]["summary_text"]
+        raise
 
 def chunk_text(text, max_tokens=MAX_TOKENS):
     _, loaded_tokenizer = load_summarizer_resources()
@@ -70,13 +128,9 @@ def summarize_chunks(chunks):
 
     for chunk in chunks:
         try:
-            summary = loaded_summarizer(
-                chunk,
-                max_length = 150,
-                min_length = 60,
-                do_sample = False 
-            )[0]["summary_text"]
-
+            chunk_token_count = len(chunk.split())
+            min_length, max_length = _summary_bounds(chunk_token_count)
+            summary = _run_summary(chunk, min_length, max_length)
             summaries.append(summary)
 
         except Exception as e:
@@ -93,29 +147,25 @@ def summarize_long_text(text):
     Returns a single coherent summary.
     """
 
-    loaded_summarizer, _ = load_summarizer_resources()
     chunks = chunk_text(text)
+    token_count = len(text.split())
 
     # Short text > summarize directly
     if len(chunks) == 1:
-       return loaded_summarizer(
-            text,
-            max_length = 180,
-            min_length = 80,
-            do_sample = False
-        )[0]["summary_text"]
+       if token_count < 40:
+           return text.strip()
+
+       min_length, max_length = _summary_bounds(token_count)
+       return _run_summary(text, min_length, max_length)
 
     # Long text = hierarchical summarization
     chunk_summaries = summarize_chunks(chunks)
 
     combined_summary_text = " ".join(chunk_summaries)
 
-    final_summary = loaded_summarizer(
-        combined_summary_text,
-        max_length = 200,
-        min_length = 100,
-        do_sample = False
-    )[0]["summary_text"]
+    combined_token_count = len(combined_summary_text.split())
+    min_length, max_length = _summary_bounds(combined_token_count)
+    final_summary = _run_summary(combined_summary_text, min_length, max_length)
     return final_summary
  
 

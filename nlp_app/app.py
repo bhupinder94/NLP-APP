@@ -16,7 +16,9 @@ db = Database(
     password=os.getenv('DB_PASSWORD', ''),
     database=os.getenv('DB_NAME', 'nlp_app')
 ) # database instance
+app.config['db'] = db
 db.create_user_table() # create user table if not exists
+db.create_analysis_history_table() # create analysis history table if not exists
 
 @app.route('/')
 def home():
@@ -30,6 +32,7 @@ def login():
 
     user = db.validate_user(email, password)
     if user:
+        session['user_id'] = user['id']
         session['user'] = user['first_name']
        # flash('Login successful!', 'success')
         return redirect(url_for('profile'))
@@ -53,12 +56,18 @@ def register():
     return render_template('register.html')
 @app.route('/profile')
 def profile():
-    if 'user' not in session:
+    if 'user' not in session or 'user_id' not in session:
         return redirect(url_for('home'))
     
     tab = request.args.get('tab','NER')  # Default to 'ner' tab
-    user_name = session['user']
-    return render_template('profile.html', active_tab=tab, app_name=APP_NAME, session=session)
+    analysis_history = db.get_user_analysis_history(session['user_id'])
+    return render_template(
+        'profile.html',
+        active_tab=tab,
+        analysis_history=analysis_history,
+        app_name=APP_NAME,
+        session=session
+    )
 
 # main module
 

@@ -6,6 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <style>
+        :root {
+            --bg: #f4f6fb;
+            --card: #ffffff;
+            --text: #16324a;
+            --muted: #66768a;
+            --border: #d8e0ea;
+            --accent: #1f4c7a;
+            --accent-strong: #163a5d;
+            --accent-soft: #d7e4f1;
+            --highlight: #c89b5d;
+            --danger: #c64141;
+            --shadow: 0 28px 60px rgba(22, 50, 74, 0.16);
+        }
+
         * {
             box-sizing: border-box;
             font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
@@ -13,81 +27,198 @@
 
         body {
             margin: 0;
-            height: 100vh;
-            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            min-height: 100vh;
+            background:
+                radial-gradient(circle at top left, rgba(200, 155, 93, 0.18), transparent 28%),
+                radial-gradient(circle at bottom right, rgba(31, 76, 122, 0.14), transparent 32%),
+                linear-gradient(180deg, #f8fafc 0%, var(--bg) 100%);
             display: flex;
             justify-content: center;
             align-items: center;
+            padding: 24px;
+            color: var(--text);
+        }
+
+        body::before,
+        body::after {
+            content: "";
+            position: fixed;
+            border-radius: 999px;
+            pointer-events: none;
+            filter: blur(8px);
+        }
+
+        body::before {
+            width: 380px;
+            height: 380px;
+            background: radial-gradient(circle, rgba(31, 76, 122, 0.045) 0%, rgba(31, 76, 122, 0) 72%);
+            top: 32px;
+            right: 48px;
+            filter: blur(18px);
+        }
+
+        body::after {
+            width: 280px;
+            height: 280px;
+            background: radial-gradient(circle, rgba(200, 155, 93, 0.055) 0%, rgba(200, 155, 93, 0) 72%);
+            bottom: 40px;
+            left: 40px;
+            filter: blur(18px);
         }
 
         .card {
-            background: #ffffff;
-            width: 380px;
-            padding: 35px;
-            border-radius: 12px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+            position: relative;
+            background: rgba(255, 255, 255, 0.94);
+            width: min(440px, 100%);
+            padding: 40px 36px 32px;
+            border-radius: 28px;
+            border: 1px solid rgba(255, 255, 255, 0.7);
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(12px);
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: "";
+            position: absolute;
+            inset: 0 0 auto;
+            height: 6px;
+            background: linear-gradient(90deg, var(--accent), var(--highlight));
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 22px;
+            background: linear-gradient(135deg, #e3edf7, #f4efe5);
+            color: var(--accent);
+            border-radius: 999px;
+            font-size: 17px;
+            font-weight: 800;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            margin-bottom: 22px;
+            box-shadow: 0 12px 24px rgba(31, 76, 122, 0.12);
+            border: 1px solid rgba(31, 76, 122, 0.08);
+        }
+
+        .eyebrow::before {
+            content: "";
+            width: 16px;
+            height: 16px;
+            border-radius: 999px;
+            background: linear-gradient(135deg, var(--accent), var(--highlight));
+            box-shadow: 0 0 0 5px rgba(31, 76, 122, 0.08);
+        }
+
+        .eyebrow strong {
+            display: inline-block;
+            font-size: 1.08em;
+            line-height: 1;
+        }
+
+        .eyebrow span {
+            color: var(--highlight);
+            margin-left: 4px;
         }
 
         .title {
-            text-align: center;
             margin-bottom: 10px;
-            font-size: 26px;
-            font-weight: bold;
-            color: #1e3c72;
+            font-size: 34px;
+            line-height: 1.1;
+            font-weight: 700;
+            color: var(--text);
         }
 
         .subtitle {
-            text-align: center;
-            font-size: 14px;
-            color: #666;
-            margin-bottom: 25px;
+            font-size: 15px;
+            color: var(--muted);
+            margin-bottom: 28px;
+            max-width: 320px;
+        }
+
+        .form-group {
+            margin-bottom: 14px;
+        }
+
+        label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 8px;
         }
 
         input {
             width: 100%;
-            padding: 12px;
-            margin-bottom: 15px;
-            border-radius: 6px;
-            border: 1px solid #ccc;
+            padding: 14px 15px;
+            border-radius: 14px;
+            border: 1px solid var(--border);
             font-size: 15px;
+            background: #fbfcfe;
+            color: var(--text);
+            transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
         }
 
         input:focus {
             outline: none;
-            border-color: #2a5298;
+            background: #ffffff;
+            border-color: rgba(31, 76, 122, 0.6);
+            box-shadow: 0 0 0 4px rgba(31, 76, 122, 0.12);
         }
 
         button {
             width: 100%;
-            padding: 12px;
-            background: #2a5298;
+            margin-top: 8px;
+            padding: 14px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-strong));
             color: #fff;
             font-size: 16px;
             border: none;
-            border-radius: 6px;
+            border-radius: 14px;
             cursor: pointer;
+            font-weight: 600;
+            letter-spacing: 0.01em;
+            box-shadow: 0 16px 30px rgba(31, 76, 122, 0.22);
+            transition: transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease;
         }
 
         button:hover {
-            background: #1e3c72;
+            transform: translateY(-1px);
+            filter: brightness(1.02);
+            box-shadow: 0 20px 32px rgba(31, 76, 122, 0.26);
         }
 
         .divider {
+            display: flex;
+            align-items: center;
+            gap: 14px;
             text-align: center;
-            margin: 20px 0;
-            color: #aaa;
-            font-size: 13px;
+            margin: 24px 0 18px;
+            color: #96a2b1;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: "";
+            height: 1px;
+            flex: 1;
+            background: linear-gradient(90deg, transparent, #d7dee7, transparent);
         }
 
         .register-link {
-            text-align: center;
             font-size: 14px;
+            color: var(--muted);
         }
 
         .register-link a {
-            color: #2a5298;
+            color: var(--accent);
             text-decoration: none;
-            font-weight: bold;
+            font-weight: 700;
         }
 
         .register-link a:hover {
@@ -95,10 +226,24 @@
         }
 
         .error {
-            text-align: center;
-            color: red;
-            margin-top: 10px;
+            margin-top: 16px;
+            padding: 12px 14px;
+            border-radius: 14px;
+            background: rgba(198, 65, 65, 0.08);
+            border: 1px solid rgba(198, 65, 65, 0.2);
+            color: var(--danger);
             font-size: 14px;
+        }
+
+        @media (max-width: 540px) {
+            .card {
+                padding: 34px 22px 26px;
+                border-radius: 22px;
+            }
+
+            .title {
+                font-size: 29px;
+            }
         }
     </style>
 </head>
@@ -106,14 +251,22 @@
 <body>
 
 <div class="card">
-    <div class="title">NLP Application</div>
-    <div class="subtitle">Login to analyze and process text</div>
+    <div class="eyebrow"><strong>TextChar</strong><span>AI</span></div>
+    <div class="title">Welcome back.</div>
+    <div class="subtitle">Sign in to analyze text, extract entities, generate summaries, and review your saved history.</div>
 
     <form method="POST" action="/login">
-        <input type="email" name="email" placeholder="Email address" required>
-        <input type="password" name="password" placeholder="Password" required>
+        <div class="form-group">
+            <label for="email">Email address</label>
+            <input id="email" type="email" name="email" placeholder="name@example.com" required>
+        </div>
 
-        <button type="submit">Login</button>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input id="password" type="password" name="password" placeholder="Enter your password" required>
+        </div>
+
+        <button type="submit">Login to Dashboard</button>
     </form>
 
     {% with messages = get_flashed_messages() %}
@@ -122,7 +275,7 @@
       {% endif %}
     {% endwith %}
 
-    <div class="divider">— OR —</div>
+    <div class="divider">Or</div>
 
     <div class="register-link">
         New here?

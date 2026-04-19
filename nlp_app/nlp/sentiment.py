@@ -7,6 +7,20 @@ sentiment_model = None
 sentiment_model_error = None
 MODEL_NAME = "distilbert-base-uncased-finetuned-sst-2-english"
 ALLOW_MODEL_DOWNLOADS = os.getenv("ALLOW_MODEL_DOWNLOADS", "0") == "1"
+device_id = 0 if os.getenv("NLP_DEVICE", "cpu").strip().lower() == "cuda" and torch.cuda.is_available() else -1
+
+
+def _is_cuda_error(exc):
+    return "cuda" in str(exc).lower()
+
+
+def _switch_to_cpu():
+    global sentiment_model, sentiment_model_error, device_id
+    if device_id == -1:
+        return
+    device_id = -1
+    sentiment_model = None
+    sentiment_model_error = None
 
 
 def get_sentiment_model():
@@ -26,7 +40,7 @@ def get_sentiment_model():
                 "sentiment-analysis",
                 model=model,
                 tokenizer=tokenizer,
-                device=0 if torch.cuda.is_available() else -1,
+                device=device_id,
                 truncation=True,
                 max_length=512
             )
@@ -44,4 +58,10 @@ def analyze_sentiment(text):
     try:
         return get_sentiment_model()(text)
     except Exception as e:
+        if _is_cuda_error(e):
+            try:
+                _switch_to_cpu()
+                return get_sentiment_model()(text)
+            except Exception as retry_error:
+                return [{"label": "ERROR", "score": 0.0, "message": str(retry_error)}]
         return [{"label": "ERROR", "score": 0.0, "message": str(e)}]
