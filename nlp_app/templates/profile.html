@@ -675,6 +675,11 @@
                     <span class="nav-meta">Run the combined analysis pipeline</span>
                 </a>
 
+                <a href="{{ url_for('profile', tab='Classify') }}" class="{% if active_tab == 'Classify' %}active{% endif %}">
+                    <span class="nav-title">Text Classifier</span>
+                    <span class="nav-meta">Classify text by emotion/category</span>
+                </a>
+
                 <a href="{{ url_for('profile', tab='History') }}" class="{% if active_tab == 'History' %}active{% endif %}">
                     <span class="nav-title">Analysis History</span>
                     <span class="nav-meta">Review your recent saved results</span>
@@ -857,6 +862,30 @@
                                 </div>
                             </div>
                             <div id="analyzeResult" class="result"></div>
+                        </div>
+                    </div>
+
+                {% elif active_tab == 'Classify' %}
+                    <div class="workspace-head">
+                        <div class="workspace-title">
+                            <h2>Text Classifier</h2>
+                            <p>Classify text into emotions or categories using AI.</p>
+                        </div>
+                        <div class="workspace-tag">Emotion detection</div>
+                    </div>
+
+                    <div class="tool-grid">
+                        <div class="tool-panel">
+                            <h3>Emotion Classifier</h3>
+                            <p>Enter text to detect emotions or sentiment categories.</p>
+                            <div class="input-stack">
+                                <textarea id="classifyText" placeholder="Enter text to classify..."></textarea>
+                                <div class="actions">
+                                    <button type="button" onclick="classifyText()">Classify Text</button>
+                                    <span class="helper">Detects emotions like joy, sadness, anger, etc.</span>
+                                </div>
+                            </div>
+                            <div id="classifyResult" class="result"></div>
                         </div>
                     </div>
 
@@ -1084,6 +1113,46 @@ function analyzeDocument() {
     })
     .catch(() => {
         box.innerHTML = "AI workspace analysis failed.";
+    });
+}
+
+function classifyText() {
+    const text = document.getElementById("classifyText").value.trim();
+    const box = document.getElementById("classifyResult");
+
+    if (!text) {
+        box.innerHTML = "Please enter text.";
+        return;
+    }
+
+    box.innerHTML = "Classifying...";
+
+    fetch("/api/classify", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: "text=" + encodeURIComponent(text)
+    })
+    .then(r => r.json())
+    .then(data => {
+        if (data.error) {
+            box.innerHTML = `${data.error}${data.details ? "<br><br>" + data.details : ""}`;
+            return;
+        }
+
+        if (!Array.isArray(data) || data.length === 0) {
+            box.innerHTML = "No classification returned.";
+            return;
+        }
+
+        let html = "<strong>Emotions:</strong><ul>";
+        data.slice(0, 5).forEach(c => {
+            html += `<li>${c.label}: ${c.score.toFixed(2)}</li>`;
+        });
+        html += "</ul>";
+        box.innerHTML = html;
+    })
+    .catch(() => {
+        box.innerHTML = "Classification failed.";
     });
 }
 </script>

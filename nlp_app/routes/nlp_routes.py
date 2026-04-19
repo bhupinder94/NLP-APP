@@ -6,6 +6,7 @@ from nlp.ner import extract_entities
 from nlp.sentiment import analyze_sentiment
 from nlp.summarizer import summarize_long_text
 from nlp.pipeline import analyze_text
+from nlp.classifier import classify_text
 
 nlp_bp = Blueprint('nlp', __name__)
 
@@ -119,3 +120,20 @@ def analyze_route():
     result = analyze_text(text, top_n_keywords=top_n)
     save_history_if_logged_in('analyze', text, result)
     return jsonify(result)
+
+
+@nlp_bp.route('/classify', methods=['POST'])
+def classify_route():
+    text = request.form.get('text')
+    if not text:
+        return jsonify({'error': 'No text provided'}), 400
+    
+    try:
+        result = classify_text(text)
+        save_history_if_logged_in('classify', text, result)
+        return jsonify(result)
+    except Exception as e:
+        return jsonify({
+            'error': 'Text classification failed',
+            'details': str(e)
+        }), 500
