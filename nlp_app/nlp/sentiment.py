@@ -6,8 +6,8 @@ from transformers import AutoModelForSequenceClassification, AutoTokenizer, pipe
 sentiment_model = None
 sentiment_model_error = None
 MODEL_NAME = "distilbert-base-uncased-finetuned-sst-2-english"
-ALLOW_MODEL_DOWNLOADS = os.getenv("ALLOW_MODEL_DOWNLOADS", "0") == "1"
-device_id = 0 if os.getenv("NLP_DEVICE", "cpu").strip().lower() == "cuda" and torch.cuda.is_available() else -1
+ALLOW_MODEL_DOWNLOADS = True
+device_id = 0 if torch.cuda.is_available() else -1
 
 
 def _is_cuda_error(exc):

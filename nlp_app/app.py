@@ -9,6 +9,19 @@ APP_NAME = "TextChar AI"
 # creater flask instance/object
 app = Flask(__name__) # main file 
 app.secret_key = os.getenv('FLASK_SECRET_KEY', 'your_secret_key') # secret key for session management
+
+# Add CORS headers
+@app.after_request
+def add_cors_headers(response):
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS'
+    response.headers['Access-Control-Allow-Headers'] = 'Content-Type'
+    return response
+
+@app.route('/api/extract-url', methods=['OPTIONS'])
+def handle_options():
+    return '', 200
+
 app.register_blueprint(nlp_bp, url_prefix='/api') #register nlp blueprint
 db = Database(
     host=os.getenv('DB_HOST', 'localhost'),

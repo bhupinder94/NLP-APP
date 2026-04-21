@@ -3,38 +3,26 @@ import os
 import torch
 from transformers import AutoModelForSeq2SeqLM, AutoTokenizer, pipeline
 
-# Device selection
+# GPU if available (auto-detect)
+device_id = 0 if torch.cuda.is_available() else -1
 
-def _requested_device():
-    requested = os.getenv("NLP_DEVICE", "cpu").strip().lower()
-    if requested == "cuda" and torch.cuda.is_available():
-        return 0
-    return -1
-
-
-def _is_cuda_error(exc):
-    return "cuda" in str(exc).lower()
- 
 # Load summarization model
-
-PRIMARY_MODEL_NAME = os.getenv("SUMMARIZER_MODEL", "google/pegasus-xsum")
-FALLBACK_MODEL_NAMES = [PRIMARY_MODEL_NAME, "sshleifer/distilbart-cnn-12-6", "facebook/bart-large-cnn"]
-ALLOW_MODEL_DOWNLOADS = os.getenv("ALLOW_MODEL_DOWNLOADS", "0") == "1"
+PRIMARY_MODEL_NAME = os.getenv("SUMMARIZER_MODEL", "t5-small")  
+FALLBACK_MODEL_NAMES = ["t5-small", "sshleifer/distilbart-cnn-12-6"]
+ALLOW_MODEL_DOWNLOADS = True
 
 summarizer = None
 tokenizer = None
 summarizer_error = None
-device_id = _requested_device()
-
-MAX_TOKENS = 512  # Larger chunks = fewer chunks = faster
+MAX_TOKENS = 512
 
 
 def _summary_bounds(token_count):
-    # Much larger bounds for longer, more informative summaries
-    max_length = max(100, min(280, token_count // 2))
-    min_length = max(50, min(120, max_length // 2))
+    # Maximum bounds for longest summaries
+    max_length = max(150, min(350, token_count // 2))
+    min_length = max(80, min(150, max_length // 2))
     if min_length >= max_length:
-        min_length = max(40, max_length - 30)
+        min_length = max(60, max_length - 40)
     return min_length, max_length
 
 # UTITLITY: chunk text safely
@@ -88,9 +76,11 @@ def _switch_to_cpu():
 
 def _run_summary(text, min_length, max_length):
     loaded_summarizer, _ = load_summarizer_resources()
+    # Add T5 prompt prefix
+    prompt = "summarize: " + text
     try:
         return loaded_summarizer(
-            text,
+            prompt,
             max_length=max_length,
             min_length=min_length,
             do_sample=False
@@ -100,7 +90,7 @@ def _run_summary(text, min_length, max_length):
             _switch_to_cpu()
             loaded_summarizer, _ = load_summarizer_resources()
             return loaded_summarizer(
-                text,
+                prompt,
                 max_length=max_length,
                 min_length=min_length,
                 do_sample=False
@@ -137,29 +127,109 @@ def summarize_chunks(chunks):
 
     return summaries
          
+#step 1: short summary (extractive)
+
+def summarize_short(text):
+    """
+    Quick extractive summary - just first few sentences.
+    Fast, no AI model needed.
+    """
+    text = text.strip()
+    if len(text) < 100:
+        return text
+    
+    sentences = text.replace('!', '.').replace('?', '.').split('.')
+    result = sentences[0].strip()
+    if len(sentences) > 1 and len(sentences[1].strip()) > 10:
+        result += ". " + sentences[1].strip()
+    if len(sentences) > 2 and len(sentences[2].strip()) > 10:
+        result += ". " + sentences[2].strip()
+    return result
+
+
+def summarize_fast(text):
+    """
+    Fast extractive summary for very long text (100k+ chars).
+    Samples key sentences from throughout the text.
+    No AI model - just algorithm.
+    """
+    text = text.strip()
+    if len(text) < 100:
+        return text
+    
+    # Split into sentences
+    sentences = text.replace('!', '.').replace('?', '.').split('.')
+    sentences = [s.strip() for s in sentences if s.strip() and len(s.strip()) > 20]
+    
+    if len(sentences) <= 3:
+        return '. '.join(sentiments[:3])
+    
+    # Sample from beginning, middle, end
+    n = len(sentences)
+    selected = []
+    
+    # Always include first sentence
+    selected.append(sentences[0])
+    
+    # Sample from middle and end
+    if n > 5:
+        selected.append(sentences[n // 2])
+    if n > 10:
+        selected.append(sentences[n * 2 // 3])
+    
+    # Last few sentences
+    selected.append(sentences[-2])
+    selected.append(sentences[-1])
+    
+    return '. '.join(s for s in selected if s) + '.'
+
 #step 2: hierarchical summary
 
 def summarize_long_text(text):
 
     """
-    Handles ANY length input safely.
-    Returns a single coherent summary.
+    Smarter extractive - picks best sentences from throughout text.
+    No AI model = instant for any length!
     """
+    
+    text = text.strip()
+    if len(text) < 100:
+        return text
 
-    chunks = chunk_text(text)
-    token_count = len(text.split())
-
-    # Direct summarization - skip hierarchical for speed
-    if len(chunks) == 1:
-       if token_count < 40:
-           return text.strip()
-
-       min_length, max_length = _summary_bounds(token_count)
-       return _run_summary(text, min_length, max_length)
-
-    # Simple concatenation for multi-chunk - just combine all summaries
-    chunk_summaries = summarize_chunks(chunks)
-    return " ".join(chunk_summaries)
+    # Split into sentences
+    sentences = text.replace('!', '.').replace('?', '.').replace(';', '.').split('.')
+    sentences = [s.strip() for s in sentences if s.strip() and len(s.strip()) > 20]
+    
+    n = len(sentences)
+    if n <= 3:
+        return '. '.join(sentences)
+    
+    # Score sentences by position (first/last are important)
+    scored = []
+    for i, s in enumerate(sentences):
+        score = 0
+        # First sentences get higher score
+        if i < n * 0.1:
+            score += 3
+        elif i < n * 0.2:
+            score += 2
+        # Last sentences important too
+        elif i >= n * 0.8:
+            score += 2
+        elif i >= n * 0.6:
+            score += 1
+        # Longer sentences are better
+        if len(s.split()) > 10:
+            score += 1
+        scored.append((score, i, s))  # Keep index for sorting
+    
+    # Sort by score and take top 6
+    scored.sort(key=lambda x: x[0], reverse=True)
+    topIndices = [s[1] for s in scored[:6]]
+    topIndices.sort()  # Sort by original position
+    
+    final = [sentences[i] for i in topIndices if i < len(sentences)]
+    return '. '.join(final) + '.'
  
 
     

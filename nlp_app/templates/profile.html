@@ -650,9 +650,9 @@
             </div>
 
             <nav class="nav">
-                <a href="{{ url_for('profile', tab='NER') }}" class="{% if active_tab == 'NER' %}active{% endif %}">
-                    <span class="nav-title">Named Entity Recognition</span>
-                    <span class="nav-meta">People, places, dates, organizations</span>
+                <a href="{{ url_for('profile', tab='Summary') }}" class="{% if active_tab == 'Summary' %}active{% endif %}">
+                    <span class="nav-title">Text Summarization</span>
+                    <span class="nav-meta">Compress long content into key points</span>
                 </a>
 
                 <a href="{{ url_for('profile', tab='Sentiment') }}" class="{% if active_tab == 'Sentiment' %}active{% endif %}">
@@ -660,24 +660,24 @@
                     <span class="nav-meta">Understand tone and confidence</span>
                 </a>
 
-                <a href="{{ url_for('profile', tab='Summary') }}" class="{% if active_tab == 'Summary' %}active{% endif %}">
-                    <span class="nav-title">Text Summarization</span>
-                    <span class="nav-meta">Compress long content into key points</span>
-                </a>
-
                 <a href="{{ url_for('profile', tab='Keywords') }}" class="{% if active_tab == 'Keywords' %}active{% endif %}">
                     <span class="nav-title">Keyword Extraction</span>
                     <span class="nav-meta">Capture the strongest phrases</span>
                 </a>
 
-                <a href="{{ url_for('profile', tab='Analyze') }}" class="{% if active_tab == 'Analyze' %}active{% endif %}">
-                    <span class="nav-title">AI Workspace</span>
-                    <span class="nav-meta">Run the combined analysis pipeline</span>
-                </a>
-
                 <a href="{{ url_for('profile', tab='Classify') }}" class="{% if active_tab == 'Classify' %}active{% endif %}">
                     <span class="nav-title">Text Classifier</span>
                     <span class="nav-meta">Classify text by emotion/category</span>
+                </a>
+
+                <a href="{{ url_for('profile', tab='NER') }}" class="{% if active_tab == 'NER' %}active{% endif %}">
+                    <span class="nav-title">Named Entity Recognition</span>
+                    <span class="nav-meta">People, places, dates, organizations</span>
+                </a>
+
+                <a href="{{ url_for('profile', tab='Analyze') }}" class="{% if active_tab == 'Analyze' %}active{% endif %}">
+                    <span class="nav-title">AI Workspace</span>
+                    <span class="nav-meta">Run the combined analysis pipeline</span>
                 </a>
 
                 <a href="{{ url_for('profile', tab='History') }}" class="{% if active_tab == 'History' %}active{% endif %}">
@@ -807,10 +807,18 @@
                             <h3>Summary Studio</h3>
                             <p>Drop in articles, notes, or reports to extract a concise overview.</p>
                             <div class="input-stack">
-                                <textarea id="summaryText" placeholder="Paste a long article, research paper, or document here."></textarea>
-                                <div class="actions">
-                                    <button type="button" onclick="analyzeSummary()">Generate Summary</button>
-                                    <span class="helper">Longer inputs may take a little more time.</span>
+                                <div style="display:flex;gap:10px;margin-bottom:10px;">
+                                    <input type="text" id="summaryUrlInput" placeholder="Or enter article URL..." style="flex:1;padding:12px;border-radius:12px;border:1px solid #ddd;">
+                                    <button type="button" onclick="loadSummaryFromURL()" style="padding:12px 20px;">Load URL</button>
+                                </div>
+                                <textarea id="summaryText" placeholder="Paste a long article, research paper, or document here (or enter URL above)." oninput="updateCharCount()"></textarea>
+                                <div style="display:flex;justify-content:space-between;align-items:center;">
+                                    <span id="charCount" style="color:#62758b;font-size:14px;">0 characters</span>
+                                    <div class="actions">
+                                        <button type="button" onclick="analyzeSummary('fast')">Quick Summary</button>
+                                        <button type="button" onclick="analyzeSummary('short')">Key Points</button>
+                                        <button type="button" onclick="analyzeSummary('long')">Smart Summary</button>
+                                    </div>
                                 </div>
                             </div>
                             <div id="summaryResult" class="result"></div>
@@ -855,10 +863,16 @@
                             <h3>Complete Document Analysis</h3>
                             <p>Use the all-in-one workflow when you want multiple NLP perspectives from the same input.</p>
                             <div class="input-stack">
-                                <textarea id="analyzeText" placeholder="Paste a long article, research paper, or document here."></textarea>
-                                <div class="actions">
-                                    <button type="button" onclick="analyzeDocument()">Analyze Document</button>
-                                    <span class="helper">Great for richer document exploration in a single pass.</span>
+                                <div style="display:flex;gap:10px;margin-bottom:10px;">
+                                    <input type="text" id="urlInput" placeholder="Or enter article URL..." style="flex:1;padding:12px;border-radius:12px;border:1px solid #ddd;">
+                                    <button type="button" onclick="loadFromURL()" style="padding:12px 20px;">Load URL</button>
+                                </div>
+                                <textarea id="analyzeText" placeholder="Paste a long article, research paper, or document here (or enter URL above)." oninput="updateWordCount()"></textarea>
+                                <div style="display:flex;justify-content:space-between;align-items:center;">
+                                    <span id="wordCount" style="color:#62758b;font-size:14px;">0 words | 0 characters</span>
+                                    <div class="actions">
+                                        <button type="button" onclick="analyzeDocument()">Analyze Document</button>
+                                    </div>
                                 </div>
                             </div>
                             <div id="analyzeResult" class="result"></div>
@@ -953,7 +967,7 @@ function analyzeSentiment() {
     });
 }
 
-function analyzeSummary() {
+function analyzeSummary(length) {
     const text = document.getElementById("summaryText").value.trim();
     const box = document.getElementById("summaryResult");
 
@@ -962,12 +976,12 @@ function analyzeSummary() {
         return;
     }
 
-    box.innerHTML = "Summarizing...";
+    box.innerHTML = length === 'short' ? "Extracting key points..." : "Summarizing...";
 
     fetch("/api/summarize", {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: "text=" + encodeURIComponent(text)
+        body: "text=" + encodeURIComponent(text) + "&length=" + length
     })
     .then(r => r.json())
     .then(data => {
@@ -980,6 +994,12 @@ function analyzeSummary() {
     .catch(() => {
         box.innerHTML = "Summarization failed.";
     });
+}
+
+function updateCharCount() {
+    const text = document.getElementById("summaryText").value;
+    const count = text.length;
+    document.getElementById("charCount").textContent = count.toLocaleString() + " characters";
 }
 
 function analyzeKeywords() {
@@ -1081,22 +1101,17 @@ function analyzeDocument() {
     .then(data => {
         let html = "";
 
+        // 1. Summary
         if (data.summary) {
             html += `<h4>Summary</h4><p>${data.summary}</p>`;
         }
 
+        // 2. Sentiment
         if (data.sentiment && data.sentiment.label) {
             html += `<h4>Sentiment</h4><p>${data.sentiment.label} (${data.sentiment.score.toFixed(2)})</p>`;
         }
 
-        if (Array.isArray(data.entities) && data.entities.length > 0) {
-            html += "<h4>Entities</h4><ul>";
-            data.entities.forEach(e => {
-                html += `<li>${e.text} &rarr; ${e.label}</li>`;
-            });
-            html += "</ul>";
-        }
-
+        // 3. Keywords
         if (Array.isArray(data.keywords) && data.keywords.length > 0) {
             html += "<h4>Keywords</h4><ul>";
             data.keywords.forEach(k => {
@@ -1109,11 +1124,36 @@ function analyzeDocument() {
             html += `<p style="color:red;">Keywords error: ${data.keywords_error}</p>`;
         }
 
+        // 4. Classification
+        if (Array.isArray(data.classification) && data.classification.length > 0) {
+            html += "<h4>Classification</h4><ul>";
+            data.classification.forEach(c => {
+                html += `<li>${c.label} (${c.score?.toFixed(2) || 'N/A'})</li>`;
+            });
+            html += "</ul>";
+        }
+
+        // 5. Entities (NER)
+        if (Array.isArray(data.entities) && data.entities.length > 0) {
+            html += "<h4>Named Entities</h4><ul>";
+            data.entities.forEach(e => {
+                html += `<li>${e.text} &rarr; ${e.label}</li>`;
+            });
+            html += "</ul>";
+        }
+
         box.innerHTML = html || "No results.";
     })
     .catch(() => {
         box.innerHTML = "AI workspace analysis failed.";
     });
+}
+
+function updateWordCount() {
+    const text = document.getElementById("analyzeText").value;
+    const chars = text.length;
+    const words = text.trim() ? text.trim().split(/\s+/).length : 0;
+    document.getElementById("wordCount").textContent = words.toLocaleString() + " words | " + chars.toLocaleString() + " characters";
 }
 
 function classifyText() {
@@ -1153,6 +1193,74 @@ function classifyText() {
     })
     .catch(() => {
         box.innerHTML = "Classification failed.";
+    });
+}
+
+function loadFromURL() {
+    const url = document.getElementById("urlInput").value.trim();
+    const textBox = document.getElementById("analyzeText");
+    const wordCountBox = document.getElementById("wordCount");
+    
+    if (!url) {
+        alert("Please enter a URL");
+        return;
+    }
+    
+    textBox.value = "Loading...";
+    
+    fetch("/api/extract-url", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: "url=" + encodeURIComponent(url)
+    })
+    .then(r => r.json())
+    .then(data => {
+        if (data.error) {
+            textBox.value = "";
+            alert(data.error + (data.details ? ": " + data.details : ""));
+            return;
+        }
+        textBox.value = data.text;
+        const chars = data.text.length;
+        const words = data.text.trim() ? data.text.trim().split(/\s+/).length : 0;
+        wordCountBox.textContent = words.toLocaleString() + " words | " + chars.toLocaleString() + " characters";
+    })
+    .catch(() => {
+        textBox.value = "";
+        alert("Failed to load URL");
+    });
+}
+
+function loadSummaryFromURL() {
+    const url = document.getElementById("summaryUrlInput").value.trim();
+    const textBox = document.getElementById("summaryText");
+    const charCountBox = document.getElementById("charCount");
+    
+    if (!url) {
+        alert("Please enter a URL");
+        return;
+    }
+    
+    textBox.value = "Loading...";
+    
+    fetch("/api/extract-url", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: "url=" + encodeURIComponent(url)
+    })
+    .then(r => r.json())
+    .then(data => {
+        if (data.error) {
+            textBox.value = "";
+            alert(data.error + (data.details ? ": " + data.details : ""));
+            return;
+        }
+        textBox.value = data.text;
+        charCountBox.textContent = data.text.length.toLocaleString() + " characters";
+    })
+    .catch(() => {
+        textBox.value = "";
+        alert("Failed to load URL");
     });
 }
 </script>

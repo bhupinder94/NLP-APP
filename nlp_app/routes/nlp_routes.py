@@ -4,9 +4,11 @@ from flask import Blueprint, current_app, jsonify, request, session
 from nlp.keywords import extract_keywords
 from nlp.ner import extract_entities
 from nlp.sentiment import analyze_sentiment
-from nlp.summarizer import summarize_long_text
+from nlp.summarizer import summarize_long_text, summarize_short, summarize_fast
 from nlp.pipeline import analyze_text
 from nlp.classifier import classify_text
+from playwright.sync_api import sync_playwright
+from bs4 import BeautifulSoup
 
 nlp_bp = Blueprint('nlp', __name__)
 
@@ -82,14 +84,19 @@ def keywords_with_sentiment_route():
 @nlp_bp.route('/summarize', methods=['POST'])
 def summarize_route():
     text = request.form.get('text')
+    length = request.form.get('length', 'long')  # 'short', 'long', or 'fast'
 
     if not text:
         return jsonify({'error': 'No text provided'}), 400
     
     try:
-
-      summary = summarize_long_text(text)
-      result = {'summary': summary}
+      if length == 'short':
+        summary = summarize_short(text)
+      elif length == 'fast':
+        summary = summarize_fast(text)
+      else:
+        summary = summarize_long_text(text)
+      result = {'summary': summary, 'length': length}
       save_history_if_logged_in('summary', text, result)
       return jsonify(result)
     except Exception as e:
@@ -120,6 +127,35 @@ def analyze_route():
     result = analyze_text(text, top_n_keywords=top_n)
     save_history_if_logged_in('analyze', text, result)
     return jsonify(result)
+
+
+@nlp_bp.route('/extract-url', methods=['POST'])
+def extract_url_route():
+    url = request.form.get('url')
+    if not url:
+        return jsonify({'error': 'No URL provided'}), 400
+    
+    if not url.startswith('http'):
+        url = 'https://' + url
+    
+    try:
+        with sync_playwright() as p:
+            browser = p.chromium.launch(headless=True)
+            page = browser.new_page()
+            page.goto(url, timeout=60000)
+            page.wait_for_timeout(5000)
+            html = page.content()
+            browser.close()
+            
+            soup = BeautifulSoup(html, 'html.parser')
+            for tag in soup(["script", "style"]):
+                tag.decompose()
+            text = soup.get_text(separator=' ')
+            text = ' '.join(text.split())
+            
+            return jsonify({'text': text[:50000]})
+    except Exception as e:
+        return jsonify({'error': 'Failed to fetch URL', 'details': str(e)}), 500
 
 
 @nlp_bp.route('/classify', methods=['POST'])

@@ -2,6 +2,7 @@ from nlp.summarizer import summarize_long_text
 from nlp.sentiment import analyze_sentiment
 from nlp.keywords import extract_keywords
 from nlp.ner import extract_entities
+from nlp.classifier import classify_text
 
 def analyze_text(text, top_n_keywords=10):
     """
@@ -71,6 +72,13 @@ def analyze_text(text, top_n_keywords=10):
     except Exception as e:
         result["entities"] = []
         result["entities_error"] = str(e)
+
+    # 5. Text Classification (algorithm-based)
+    try:
+        result["classification"] = classify_text(text)
+    except Exception as e:
+        result["classification"] = []
+        result["classification_error"] = str(e)
 
     return result        
 
