@@ -1,262 +1,113 @@
 # TextChar AI
 
-TextChar AI is a Flask-based NLP web application with user login/registration and an interactive dashboard for common text analysis tasks.
-
-The app currently supports:
-
-- Named Entity Recognition
-- Sentiment Analysis
-- Text Summarization
-- Keyword Extraction
-- Combined document analysis in a single workflow
+TextChar AI is a Flask-based NLP web application with user login/registration and an interactive dashboard for text analysis tasks.
 
 ## Features
 
-- Flask web app with HTML templates for login, registration, and dashboard views
-- NLP API routes under `/api`
-- User authentication with hashed passwords using `bcrypt`
-- MySQL support for user storage
-- Automatic fallback to SQLite when MySQL is unavailable
-- Lazy model loading so the app can start even when large NLP models are not preloaded
+### NLP Tools
+- **Text Summarization** - 3 options: Quick Summary, Key Points, Smart Summary
+- **Sentiment Analysis** - Detect positive/negative tone
+- **Keyword Extraction** - Find key phrases
+- **Text Classifier** - Detect emotions/categories (algorithm-based)
+- **Named Entity Recognition** - Extract names, places, organizations
+- **AI Workspace** - Complete analysis in one click
 
-## Project Structure
-
-```text
-demosession_api13lecture/
-├── README.md
-├── .gitignore
-├── .vscode/
-├── myenv/
-└── nlp_app/
-    ├── app.py
-    ├── db.py
-    ├── requirements.txt
-    ├── nlp/
-    │   ├── keywords.py
-    │   ├── ner.py
-    │   ├── pipeline.py
-    │   ├── sentiment.py
-    │   └── summarizer.py
-    ├── routes/
-    │   └── nlp_routes.py
-    └── templates/
-        ├── login.html
-        ├── register.html
-        └── profile.html
-```
+### Additional Features
+- **URL Extraction** - Load articles from any URL (uses Playwright browser automation)
+- **GPU Support** - Automatic GPU detection for faster AI processing
+- **Live Character Count** - Shows character/word count as you type
+- **Analysis History** - Save and review past analyses
 
 ## Tech Stack
 
-- Python
-- Flask
-- Jinja2
-- MySQL Connector
-- SQLite
-- bcrypt
-- spaCy
-- Transformers
-- PyTorch
-- KeyBERT
-- Sentence Transformers
+- Python, Flask, Jinja2
+- MySQL/SQLite, bcrypt
+- PyTorch, Transformers, spaCy
+- KeyBERT, Sentence Transformers
+- Playwright (URL extraction)
+- GPU acceleration
 
 ## Setup
 
-### 1. Clone the repository
-
 ```bash
+# Clone
 git clone https://github.com/bhupinder94/NLP-APP.git
 cd NLP-APP
-```
 
-### 2. Create and activate a virtual environment
-
-Windows PowerShell:
-
-```powershell
-python -m venv myenv
-.\myenv\Scripts\Activate.ps1
-```
-
-Windows Command Prompt:
-
-```bat
+# Create virtual environment
 python -m venv myenv
 myenv\Scripts\activate
-```
 
-### 3. Install dependencies
-
-Base dependencies from the project:
-
-```bash
+# Install dependencies
 pip install -r nlp_app/requirements.txt
-```
 
-This app also imports NLP and database packages that should be installed in the same environment:
-
-```bash
-pip install requests bcrypt mysql-connector-python torch transformers sentence-transformers keybert spacy
-```
-
-Install the spaCy English model used for NER:
-
-```bash
+# Install spaCy model
 python -m spacy download en_core_web_md
+
+# Run
+cd nlp_app
+python app.py
 ```
 
 ## Environment Variables
 
-The app reads database and app settings from environment variables.
-
-Optional variables:
-
-- `FLASK_SECRET_KEY`
-- `DB_HOST`
-- `DB_USER`
-- `DB_PASSWORD`
-- `DB_NAME`
-- `ALLOW_MODEL_DOWNLOADS`
-
-Example in PowerShell:
-
+Optional (PowerShell):
 ```powershell
 $env:FLASK_SECRET_KEY = "change-me"
-$env:DB_HOST = "localhost"
-$env:DB_USER = "root"
-$env:DB_PASSWORD = "your-mysql-password"
-$env:DB_NAME = "nlp_app"
-$env:ALLOW_MODEL_DOWNLOADS = "1"
+$env:NLP_DEVICE = "cuda"  # Use GPU if available
 ```
 
-## Database Behavior
-
-On startup, the app tries to connect to MySQL first.
-
-- If MySQL is available and credentials are correct, user data is stored in MySQL.
-- If MySQL is unavailable or authentication fails, the app falls back to SQLite.
-- The SQLite fallback database is created at `nlp_app/nlp_app.db`.
-
-This makes local development easier because the app can still run without a working MySQL server.
-
-## Run the App
-
-From the `nlp_app` directory:
+## Running the App
 
 ```bash
 cd nlp_app
 python app.py
 ```
 
-You should then see Flask running at:
+Then open: http://127.0.0.1:5000
 
-```text
-http://127.0.0.1:5000
-```
+## Tab Order
 
-Open that URL in your browser.
-
-## Web Pages
-
-- `/` -> Login page
-- `/register` -> Registration page
-- `/profile` -> Dashboard after login
+Side navigation: Summary → Sentiment → Keywords → Classifier → NER → AI Workspace → History
 
 ## API Endpoints
 
-All NLP routes are available under `/api`.
+All NLP routes under `/api`:
 
-### `POST /api/keywords`
+| Endpoint | Description |
+|----------|-------------|
+| `/api/summarize` | Summarize text (params: text, length=short/long/fast) |
+| `/api/sentiment` | Sentiment analysis |
+| `/api/keywords` | Extract keywords |
+| `/api/ner` | Named entity recognition |
+| `/api/classify` | Text classification |
+| `/api/analyze` | Full pipeline analysis |
+| `/api/extract-url` | Extract text from URL |
 
-Extracts keywords from text.
+## Summary Options
 
-Form fields:
+| Option | Speed | Method |
+|--------|-------|--------|
+| Quick Summary | Instant | Extracts key sentences |
+| Key Points | Instant | First 3 sentences |
+| Smart Summary | Instant | Scored extractive |
+| Full AI | Uses AI model | Neural summarization |
 
-- `text`
-- `top_n` optional, default `10`
+## GPU Support
 
-### `POST /api/ner`
+The app automatically detects GPU if available. For faster AI:
 
-Extracts named entities from text.
-
-Form fields:
-
-- `text`
-
-### `POST /api/sentiment`
-
-Runs sentiment analysis.
-
-Form fields:
-
-- `text`
-
-### `POST /api/summarize`
-
-Summarizes long text.
-
-Form fields:
-
-- `text`
-
-### `POST /api/keywords-with-sentiment`
-
-Returns both keywords and sentiment for the same text.
-
-Form fields:
-
-- `text`
-- `top_n` optional, default `10`
-
-### `POST /api/analyze`
-
-Runs a combined pipeline for:
-
-- summary
-- sentiment
-- keywords
-- named entities
-
-Form fields:
-
-- `text`
-- `top_n` optional, default `10`
+```cmd
+set NLP_DEVICE=cuda
+python app.py
+```
 
 ## Notes on Models
 
-- Sentiment, summarization, and keyword models load on first use.
-- If models are not already cached locally, set `ALLOW_MODEL_DOWNLOADS=1` to allow downloading them.
-- If internet access is blocked and models are not cached, those endpoints will return informative errors instead of crashing the app.
-- NER requires the spaCy model `en_core_web_md` to be installed locally.
+- AI models load on first use
+- Set `ALLOW_MODEL_DOWNLOADS=1` to auto-download models
+- GPU makes AI processing 10-50x faster
 
-## Common Issues
+## License
 
-### MySQL access denied
-
-If you see a MySQL authentication error, either:
-
-- set the correct `DB_PASSWORD`, or
-- continue using the automatic SQLite fallback for local development
-
-### App starts but browser does not open
-
-Flask does not automatically open a browser window. Open:
-
-```text
-http://127.0.0.1:5000
-```
-
-manually.
-
-### High system load in VS Code
-
-If VS Code feels slow, avoid opening the large `myenv` folder as indexed workspace content. This repository already includes workspace settings to reduce that overhead.
-
-## Future Improvements
-
-- Add a complete `requirements.txt` for all NLP dependencies
-- Add logout route and session cleanup
-- Add better error handling in combined routes
-- Add tests for API endpoints
-- Add Docker support
-
-
+MIT License
