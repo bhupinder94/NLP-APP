@@ -121,6 +121,10 @@ python app.py
 ### Tools
 <img width="1920" height="880" alt="nlp1" src="https://github.com/user-attachments/assets/a7a24ec1-38c3-4498-94ee-f6a62df0c491" />
 
+### Demo Video
+
+https://github.com/user-attachments/assets/765a79e8-a128-4845-a48a-4dca0d965ee9
+
 ## License
 
 MIT License
