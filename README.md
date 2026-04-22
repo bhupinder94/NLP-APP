@@ -1,3 +1,6 @@
+<img width="1910" height="887" alt="nlp3" src="https://github.com/user-attachments/assets/5fc860f5-b6d5-464f-a4e0-70d77d993fe7" />
+<img width="1920" height="880" alt="nlp2" src="https://github.com/user-attachments/assets/3804e35b-22b2-49a4-a7af-2a809e7760e8" />
+<img width="1920" height="880" alt="nlp1" src="https://github.com/user-attachments/assets/a7a24ec1-38c3-4498-94ee-f6a62df0c491" />
 # TextChar AI
 
 TextChar AI is a Flask-based NLP web application with user login/registration and an interactive dashboard for text analysis tasks.
