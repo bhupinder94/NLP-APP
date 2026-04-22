@@ -108,6 +108,23 @@ python app.py
 - Set `ALLOW_MODEL_DOWNLOADS=1` to auto-download models
 - GPU makes AI processing 10-50x faster
 
+## Visuals
+
+### Login Page
+
+<img width="1910" height="887" alt="nlp3" src="https://github.com/user-attachments/assets/5fc860f5-b6d5-464f-a4e0-70d77d993fe7" />
+
+### Dashboard
+
+<img width="1920" height="880" alt="nlp2" src="https://github.com/user-attachments/assets/3804e35b-22b2-49a4-a7af-2a809e7760e8" />
+
+### Tools
+<img width="1920" height="880" alt="nlp1" src="https://github.com/user-attachments/assets/a7a24ec1-38c3-4498-94ee-f6a62df0c491" />
+
+### Demo Video
+
+https://github.com/user-attachments/assets/765a79e8-a128-4845-a48a-4dca0d965ee9
+
 ## License
 
 MIT License
