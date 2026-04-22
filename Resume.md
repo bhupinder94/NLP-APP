@@ -5,7 +5,7 @@
 ---
 
 ## Career Objective
-Motivated professional with academic training in Artificial Intelligence, Machine Learning, and Data Science. Hands-on experience through academic projects in Python, data preprocessing, NLP, and machine learning. Seeking an entry-level internship or junior role to apply skills, gain industry exposure, and grow in a data-driven environment.
+Aspiring AI/ML Engineer with hands-on experience in building NLP applications, data visualization dashboards, and deploying AI models. Developed production-ready web applications using Python, Flask, and PyTorch with GPU acceleration. Seeking an entry-level role to apply skills in real-world AI/ML projects, data analysis, and contribute to innovative solutions.
 
 ---
 
@@ -14,51 +14,54 @@ Motivated professional with academic training in Artificial Intelligence, Machin
 | Category | Skills |
 |----------|-------|
 | **Programming** | Python |
-| **Data Analysis** | Data Cleaning, Data Preprocessing, EDA |
-| **ML/AI** | ML Algorithms, Model Training, Model Evaluation |
-| **Libraries** | NumPy, Pandas, Scikit-learn, TensorFlow, PyTorch, OpenCV, SpaCy |
-| **Tools** | Jupyter Notebook, VS Code, GitHub |
-| **SQL** | Group By, Joins, Subqueries, Window Functions |
-| **Excel** | Pivot Tables, VLOOKUP, XLOOKUP, Conditional Formatting |
+| **Web Development** | Flask, HTML/CSS, Jinja2 |
+| **ML/AI** | PyTorch, TensorFlow, Scikit-learn, KeyBERT, Transformers |
+| **NLP Tools** | Text Summarization, Sentiment Analysis, NER, Keyword Extraction, Text Classification |
+| **Data Visualization** | Power BI, DAX, Power Query, ETL, KPI Indicators |
+| **Computer Vision** | OpenCV |
+| **Tools** | Jupyter Notebook, VS Code, GitHub, Playwright (Browser Automation) |
+| **Databases** | SQL (MySQL, SQLite), Excel |
+| **Hardware** | GPU Acceleration (CUDA) |
 
 ---
 
 ## Projects
 
-### 1. TextChar AI - NLP Web Application
-Full-stack web application for text analysis using Flask, Python, and AI/ML models.
+### 1. TextChar AI - NLP Web Application ⚡
+Real-time NLP web application for text analysis with 6 integrated AI tools.
 
-- Integrated 6 NLP tools: Text Summarization, Sentiment Analysis, Keyword Extraction, Text Classification, NER, AI Workspace
-- Implemented GPU acceleration with PyTorch for 10-50x faster AI processing
-- Built URL content extraction using Playwright browser automation
-- Features: User authentication, live character count, analysis history
+- **Features:** Text Summarization (3 modes), Sentiment Analysis, Keyword Extraction, Text Classification, Named Entity Recognition, AI Workspace
+- **AI Processing:** GPU acceleration with PyTorch for 10-50x faster inference
+- **URL Extraction:** Built Playwright browser automation for dynamic web content scraping
+- **Backend:** Flask REST API with user authentication (bcrypt), MySQL/SQLite database
+- **Deployment:** Localhost with auto-GPU detection
 
-**Technologies:** Python, Flask, PyTorch, Transformers, spaCy, KeyBERT, Playwright, MySQL/SQLite  
+**Tech Stack:** Python, Flask, PyTorch, Transformers, spaCy, KeyBERT, Playwright, MySQL/SQLite, CUDA  
 **GitHub:** https://github.com/bhupinder94/NLP-APP
 
 ---
 
-### 2. Power BI Dashboards
-Interactive data jobs market analysis dashboard.
+### 2. Power BI Dashboards 📊
+Interactive data visualization dashboard for jobs market analysis.
 
-- Created 2 pages: High-Level Market View + Job Title Drill-Through
-- Skills: Power Query (ETL), DAX Measures, Charts, Maps, KPIs
-- Features: Slicers, Buttons, Bookmarks, Drill-through
-- Visualized salaries, locations, job demand, and hiring trends
+- **Dashboard Pages:** 2 interactive pages (Market Overview + Job Drill-Through)
+- **Visualizations:** Bar/Line/Pie Charts, Maps, KPI Cards, Tables
+- **Advanced Features:** Power Query (ETL), DAX Measures, Slicers, Bookmarks, Drill-through, Buttons
+- **Data Analysis:** Analyzed hiring trends, salary distributions, location insights
 
-**Technologies:** Power BI, DAX, Power Query  
+**Tech Stack:** Power BI, DAX, Power Query, Excel  
 **GitHub:** https://github.com/bhupinder94/Power_BI_Dashboards
 
 ---
 
-### 3. Smart AI Video Editing Tool (Academic Project)
-AI-based video editing application using Python and OpenCV.
+### 3. Smart AI Video Editing Tool 🎬
+AI-powered video editing automation using computer vision.
 
-- Implemented video trimming and subtitle generation using MoviePy and Vosk
-- Applied computer vision techniques for media processing
-- Worked with real-world video data for preprocessing and automation
+- **Features:** Video trimming, subtitle generation using Vosk
+- **Processing:** OpenCV for video frame manipulation
+- **Automation:** Automated media processing pipelines
 
-**Technologies:** Python, OpenCV, MoviePy, Vosk
+**Tech Stack:** Python, OpenCV, MoviePy, Vosk
 
 ---
 
